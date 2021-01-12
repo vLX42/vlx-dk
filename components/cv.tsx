@@ -20,13 +20,7 @@ const Cv = ({ cv }: cvProps) => (
             ></Image>
           )}
 
-{cv.video1 && (
-            <video src={cv.video1} />
-          )}
 
-{cv.video2 && (
-            <video src={cv.video2} />
-          )}
         </div>
         <div className="flex flex-col items-center text-center lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 md:items-start md:text-left">
           <StyledMarkdown>{cv.content}</StyledMarkdown>
