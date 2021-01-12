@@ -1,0 +1,77 @@
+/* ./styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .glass {
+    /* @apply backdrop-filter-blur; */
+    background: rgb(255, 255, 255,0.25);
+    background: linear-gradient(
+      128deg,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(112, 112, 112, 0.25) 73%,
+      rgba(159, 159, 159, 0.4) 81%,
+      rgba(163, 163, 163, 0.5) 89%,
+      rgba(54, 54, 54, 0.4) 100%
+    );
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+}
+
+html,
+body {
+  overscroll-behavior: none;
+}
+
+$black: #141414;
+
+.inverted {
+  filter: invert(100%);
+  &:hover {
+    filter: invert(50%);
+  }
+}
+
+.scroll-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  // will-change: transform;
+
+  .ghost {
+    width: 100vw;
+  }
+}
+
+.thumbnails-container {
+  position: relative;
+  height: 100vh;
+  width: max-content;
+  display: flex;
+  align-items: center;
+  padding: 0px 75px;
+  z-index: 1;
+
+  .thumbnails {
+    position: relative;
+    display: flex;
+    z-index: 2;
+
+    & > *:not(:last-child) {
+      margin-right: 45px;
+    }
+
+    .thumbnail {
+      height: 70vh;
+      width: 80vw;
+      margin: 5vw 5vw 5vh 5vh;
+      z-index: 3;
+      margin: 50px;
+    }
+  }
+}
