@@ -26,7 +26,7 @@ const FrontPage = () => {
       <div className="mx-auto flex flex-col md:flex-row items-center">
         <div className="flex flex-col w-full justify-center items-start pt-12 pb-24">
           <p className="uppercase tracking-loose">
-            I have been working profesionel with Web Development since 1999
+            I have been working professional with Web Development since 1999
           </p>
           <h1 className="my-4">
             I’m currently working for{' '}
@@ -40,7 +40,7 @@ const FrontPage = () => {
             as "Developer"
           </h1>
           <p className="leading-normal mb-4">
-            I'm experinced working with technologies like:{' '}
+            I'm experienced working with technologies like:{' '}
             React.js, <a
               href="https://nextjs.org/"
               className="underline"
@@ -81,9 +81,7 @@ const FrontPage = () => {
           </p>
 
           <p>
-            Beside my normal work I'm also responsible for the Frontend Community at DFDS,
-            where we every three weeks gater and share experinces or talk about
-            new technologies.
+          Beside my normal work I'm also responsible for the Frontend Community at DFDS, where we every three weeks gather and share experiences or talk about new technologies.
           </p>
           <p>
             <br />

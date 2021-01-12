@@ -2,13 +2,12 @@
 video: '/lasf.mp4'
 videoThumb: '/lasf.jpg'
 year: '2016'
+technology: 'React, Redux, .net Core'
 ---
 
 ## 2002-2018 - System Developer and Partner
-# The "SiteWorks Aps" Years
+# The "SiteWorks" Years - Part III
 
-Me and three other started SiteWorks in 2002 after we had the opertunity to buy out the product we startede develop under Telia Internet. And for the next 16 years I was the main guy behind two custom CMS system that has been used on more than 1.500 sites over time. Both system where build on a SQL-Server database and the the old CMS was build in Classic ASP and a newer rewrite writen in .Net MVC C#.
+One of our other customers Danske Fodterapeuter also had a need for a contract solution, there flow where even more complicated. They had a tenant contract where the clinic owners needed to follow a 50-page guide to construct the contract. So, I constructed a similar solution to them with a bit different flow and some more help functions.
 
-The CMS is stil being used by big sites like <a href="https://aidsfondet.dk/" target="_blank">Aidsfondet.dk</a>, <a href="https://www.artisten.dk/" target="_blank">Artisten.dk</a>, <a href="https://www.bikestardo.com/" target="_blank">Bikestardo.com</a>, <a href="https://webshop.fodterapeut.dk/" target="_blank">Danske Fodterapeuter WebShop</a>
-
-The system is also used for event registrations, and have been used by Danske Bank, Deloite, Vækstfonden, see more examples <a href="http://www.tilmeldingssystem.dk/Cases" target="_blank">here</a>.
+This solution was also written in React.js, Redux and .Net Core. Because this was only accessible for users logged into the main page some user authentication was also added.
