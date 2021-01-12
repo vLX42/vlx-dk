@@ -105,11 +105,14 @@ const Layout = ({ children }: Props) => {
     color2: '#ffffff',
   })
 
-  useEffect(() => {
+  const randomColor = () => {
     const { name, color1, color2 } = colors[
       Math.floor(Math.random() * colors.length)
     ]
     setColor({ name, color1, color2 })
+  }
+  useEffect(() => {
+    randomColor()
   }, [])
 
   return (
@@ -125,8 +128,9 @@ const Layout = ({ children }: Props) => {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         {children}
-        <div className="fixed bottom-0 right-0 text-center text-xs text-gray-300 p-1 pl-2">
-          Color theme: <i>{color.name}</i>{' '}
+        <div className="fixed bottom-0 right-0 text-center text-xs text-gray-400 p-2">
+         Color theme: <i>{color.name}</i>{' '}
+         <button onClick={() => randomColor()} className="focus:outline-none outline-none">🔄</button>
         </div>
       </div>
     </>
