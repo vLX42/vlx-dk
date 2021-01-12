@@ -5,6 +5,7 @@ type CvType = {
     coverImage: string
     video: string
     videoThumb: string
+    technology: string
     content: string
   }
   

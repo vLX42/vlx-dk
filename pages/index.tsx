@@ -27,6 +27,7 @@ export const getStaticProps = async () => {
     'video',
     'videoThumb',
     'content',
+    'technology',
   ])
 
   return {

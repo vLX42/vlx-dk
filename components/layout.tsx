@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import AnimatedBackground from './animatedBackground'
+import { useState, useEffect } from 'react'
 
 type Props = {
   children: React.ReactNode
@@ -98,14 +99,24 @@ const colors = [
 ]
 
 const Layout = ({ children }: Props) => {
-  const { name, color1, color2 } = colors[
-    Math.floor(Math.random() * colors.length)
-  ]
+  const [color, setColor] = useState({
+    name: 'Default',
+    color1: '#ffffff',
+    color2: '#ffffff',
+  })
+
+  useEffect(() => {
+    const { name, color1, color2 } = colors[
+      Math.floor(Math.random() * colors.length)
+    ]
+    setColor({ name, color1, color2 })
+  }, [])
+
   return (
     <>
       <AnimatedBackground
-        color1={color1}
-        color2={color2}
+        color1={color.color1}
+        color2={color.color2}
         className="fixed h-full w-full object-cover"
       />
       <div className="overscroll-none bg-fixed">
@@ -115,7 +126,7 @@ const Layout = ({ children }: Props) => {
         </Head>
         {children}
         <div className="fixed bottom-0 right-0 text-center text-xs text-gray-300 p-1 pl-2">
-          Color theme: <i>{name}</i>{' '}
+          Color theme: <i>{color.name}</i>{' '}
         </div>
       </div>
     </>

@@ -26,6 +26,10 @@ const Cv = ({ cv }: cvProps) => (
         <div className="flex flex-col items-center text-center lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 md:items-start md:text-left">
           <StyledMarkdown>{cv.content}</StyledMarkdown>
         </div>
+        <div className="fixed bottom-0 left-0 text-center text-sm text-gray-800 p-3">
+          Tech: <i>{cv.technology}</i>{' '}
+        </div>
+
       </div>
     </div>
   </>
