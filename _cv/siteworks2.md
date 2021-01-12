@@ -1,6 +1,6 @@
 ---
-video1: '../public/whad.mp4'
-video2: '../public/lasf.mp4'
+video1: '/whad.mp4'
+video2: '/lasf.mp4'
 year: '2017'
 ---
 
