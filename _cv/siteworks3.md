@@ -1,5 +1,6 @@
 ---
 video: '/lasf.mp4'
+videoThumb: '/lasf.jpg'
 year: '2016'
 ---
 

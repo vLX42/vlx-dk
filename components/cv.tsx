@@ -20,7 +20,7 @@ const Cv = ({ cv }: cvProps) => (
             ></Image>
           )}
 
-          {cv.video && <ReactPlayer className="object-cover object-center rounded" width="100%" controls url={cv.video} />}
+          {cv.video && <ReactPlayer className="object-cover object-center rounded" width="100%" controls url={cv.video} light={cv.videoThumb} />}
 
         </div>
         <div className="flex flex-col items-center text-center lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 md:items-start md:text-left">

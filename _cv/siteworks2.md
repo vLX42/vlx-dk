@@ -1,5 +1,6 @@
 ---
 video: '/whad.mp4'
+videoThumb: '/whad.jpg'
 year: '2017'
 ---
 

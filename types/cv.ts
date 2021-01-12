@@ -4,6 +4,7 @@ type CvType = {
     year: string
     coverImage: string
     video: string
+    videoThumb: string
     content: string
   }
   
