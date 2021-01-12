@@ -1,4 +1,4 @@
-import React, { useRef, useState, useLayoutEffect, useCallback } from 'react'
+import React, { useRef, useState, useLayoutEffect, useEffect, useCallback } from 'react'
 import ResizeObserver from 'resize-observer-polyfill'
 import {
   motion,
@@ -12,6 +12,9 @@ import FrontPage from './frontpage'
 import Cv from './cv'
 import cv from '../types/cv'
 
+const useIsomorphicLayoutEffect =
+  typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+
 import { type } from 'os'
 type contentProps = {
   data: cv[]
@@ -22,7 +25,7 @@ const Content = ({ data }: contentProps) => {
   const [scrollRange, setScrollRange] = useState(0)
   const [viewportW, setViewportW] = useState(0)
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (null !== scrollRef.current) {
       setScrollRange(scrollRef?.current.scrollWidth)
     }
@@ -34,7 +37,7 @@ const Content = ({ data }: contentProps) => {
     }
   }, [])
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => onResize(entries))
     if (null !== ghostRef.current) {
       resizeObserver.observe(ghostRef.current)
