@@ -3,8 +3,7 @@ type CvType = {
     title: string
     year: string
     coverImage: string
-    video1: string
-    video2: string
+    video: string
     content: string
   }
   

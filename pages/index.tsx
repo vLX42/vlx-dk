@@ -24,8 +24,7 @@ export const getStaticProps = async () => {
     'year',
     'slug',
     'coverImage',
-    'video1',
-    'video2',
+    'video',
     'content',
   ])
 

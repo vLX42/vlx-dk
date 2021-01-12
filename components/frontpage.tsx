@@ -87,7 +87,7 @@ const FrontPage = () => {
           </p>
           <p>
             <br />
-            <span>Scroll down for more or follow me on these media:</span><br />
+            <span>Scroll for more or follow me on these media:</span><br />
         <a href="https://github.com/vLX42/" target="_blank" className="p-1">
           <Image
             src="/github.svg"
