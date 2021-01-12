@@ -17,8 +17,8 @@ const animatedBackground = ({ color1, color2, className }) => (
   >
     <g transform="translate(685.5,414) scale(1,1) translate(-685.5,-414)">
       <linearGradient id="lg-0.05705496120009701" x1="0" x2="1" y1="0" y2="0">
-        <stop stop-color={color1} offset="0"></stop>
-        <stop stop-color={color2} offset="1"></stop>
+        <stop stopColor={color1} offset="0"></stop>
+        <stop stopColor={color2} offset="1"></stop>
       </linearGradient>
       <path d="" fill="url(#lg-0.05705496120009701)" opacity="0.4">
         <animate
