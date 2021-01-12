@@ -132,6 +132,9 @@ const Layout = ({ children }: Props) => {
          Color theme: <i>{color.name}</i>{' '}
          <button onClick={() => randomColor()} className="focus:outline-none outline-none">🔄</button>
         </div>
+        <div className="fixed bottom-0 left-0 text-center text-xs text-gray-400 p-2">
+         <a href="https://github.com/vLX42/vlx-dk" target="_blank">Source code for this page</a>
+        </div>
       </div>
     </>
   )
