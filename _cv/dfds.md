@@ -3,7 +3,7 @@ coverImage: '/dfds.png'
 year: '2020'
 technology: 'Next.Js, React, Redux, Nest.Js, Node.Js, TypeScript'
 ---
-## 2018-? Frontend Developer
+## 2019-? Frontend Developer
 
 # DFDS A/S
 

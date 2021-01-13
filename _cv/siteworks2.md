@@ -5,7 +5,7 @@ year: '2017'
 technology: 'React, Redux, .net Core'
 ---
 
-## 2002-2018 - System Developer and Partner
+## 2002-2019 - System Developer and Partner
 # The "SiteWorks" Years - Part II
 
 Often some of our bigger customers in Siteworks needed a custom solution, <a href="https://www.artisten.dk/" target="_blank">Dansk Artist Forbund</a> needed a solution for their members to create a contract online between an artist and a venue.

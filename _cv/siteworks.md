@@ -1,10 +1,10 @@
 ---
 coverImage: '/aidsfondet.png'
-year: '2018'
+year: '2019'
 technology: '.Net MVC, C#, Sql-server, ASP, Jquery, ExtJs'
 ---
 
-## 2002-2018 - System Developer and Partner
+## 2002-2019 - System Developer and Partner
 # The "SiteWorks" Years - Part I
 
 Me and three others started SiteWorks in 2002 after we had the opportunity to buy out the product, we started developing under Telia Internet. And for the next 16 years I was the main developer behind two custom CMS system that has been used on more than 1.500 sites over time. Both system where build on a SQL-Server database and the old CMS was built in Classic ASP and a newer rewrite written in .Net MVC C#.
