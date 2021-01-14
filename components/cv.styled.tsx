@@ -10,7 +10,7 @@ const StyledMarkdown = ({ children }: StyledMarkdownProps) => (
         h1: {
           props: {
             className:
-              'mb-2 md:mb-8 text-xl md:text-2xl font-bold tracking-tighter text-white text-left lg:text-5xl',
+              'mb-8 text-2xl font-bold tracking-tighter text-center text-white lg:text-left lg:text-5xl',
           },
         },
         h2: {
@@ -22,7 +22,7 @@ const StyledMarkdown = ({ children }: StyledMarkdownProps) => (
         p: {
           props: {
             className:
-              'mb-8 text-sm md:text-base md:leading-relaxed text-white text-left  lg:text-xl',
+              'mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-xl',
           },
         },
         a: {
