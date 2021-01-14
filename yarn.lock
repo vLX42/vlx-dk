@@ -287,10 +287,10 @@
   dependencies:
     "@types/unist" "*"
 
-"@types/node@^14.14.20":
-  version "14.14.20"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.20.tgz#f7974863edd21d1f8a494a73e8e2b3658615c340"
-  integrity sha512-Y93R97Ouif9JEOWPIUyU+eyIdyRqQR0I8Ez1dzku4hDx34NWh4HbtIc3WNzwB1Y9ULvNGeu5B8h8bVL5cAk4/A==
+"@types/node@^14.14.21":
+  version "14.14.21"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.21.tgz#d934aacc22424fe9622ebf6857370c052eae464e"
+  integrity sha512-cHYfKsnwllYhjOzuC5q1VpguABBeecUp24yFluHpn/BQaVxB1CuQ1FSRZCzrPxrkIfWISXV2LbeoBthLWg0+0A==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -2024,10 +2024,10 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-framer-motion@3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-3.2.0.tgz#ed81d7998152ec7545f7e29bd8241d36d1e1d15d"
-  integrity sha512-1yTtCIsm5FV/E1aMj4/JYsKhC07n4Gy90XSl0+JKhY6WX8Dsu6YtQvIZMxKpGH4dcJNnT2GZdeLzhJ/2xkNR9A==
+framer-motion@3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-3.2.1.tgz#66eeb883a0b5c425dd7767ecacdeac451c184cdb"
+  integrity sha512-5AWrh4JElgFAXWLqk0u8lVcdkigyuofyEy2LSsjuCxKbAb1hHqRn3PPdrV0KgPrysTHq95QO1bHFTLA7/Q8g+Q==
   dependencies:
     framesync "^5.0.0"
     hey-listen "^1.0.8"
@@ -3901,10 +3901,10 @@ react-tooltip@^4.2.11:
     prop-types "^15.7.2"
     uuid "^7.0.3"
 
-react-use-gesture@9.0.0-beta.11:
-  version "9.0.0-beta.11"
-  resolved "https://registry.yarnpkg.com/react-use-gesture/-/react-use-gesture-9.0.0-beta.11.tgz#7849219e91d3c8a1b396c4036d40125fe6ed1d06"
-  integrity sha512-lpn39vmrDu/zB2bNx7rjaL0+Gjm17a9mzn53bX9IP4TIjMUxXlsB0IkiFj/B23F0vq1A9ozDLGHl2OaXkKJcBg==
+react-use-gesture@9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/react-use-gesture/-/react-use-gesture-9.0.0.tgz#c3c1d011e522315da6b31c38619cd4302f41a63b"
+  integrity sha512-inTAcmX0Y8LWr7XViim5+6XlTsJ7kCgwYRrwxSu1Vkjv+8GyClHITFkGGKYXAv5QywZ8YqiJXpzFx8RZpEVF+w==
 
 react@17.0.1:
   version "17.0.1"
@@ -4137,10 +4137,10 @@ sass-loader@10.0.5:
     schema-utils "^3.0.0"
     semver "^7.3.2"
 
-sass@1.32.2:
-  version "1.32.2"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.32.2.tgz#66dc0250bc86c15d19ddee7135e93d0cf3d3257b"
-  integrity sha512-u1pUuzqwz3SAgvHSWp1k0mRhX82b2DdlVnP6UIetQPZtYbuJUDaPQhZE12jyjB7vYeOScfz9WPsZJB6Rpk7heA==
+sass@1.32.4:
+  version "1.32.4"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.32.4.tgz#308bf29dd7f53d44ae4f06580e9a910ad9aa411e"
+  integrity sha512-N0BT0PI/t3+gD8jKa83zJJUb7ssfQnRRfqN+GIErokW6U4guBpfYl8qYB+OFLEho+QvnV5ZH1R9qhUC/Z2Ch9w==
   dependencies:
     chokidar ">=2.0.0 <4.0.0"
 
