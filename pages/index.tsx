@@ -1,16 +1,22 @@
+
+import FPSStats from '../components/fpsStats'
 import Layout from "../components/layout";
 import Content from "../components/content";
 import { getAllCvs } from '../lib/api'
 import cv from '../types/cv'
+import useFPSDetect from '../components/fpsDetect'
 
 type Props = {
   allCvs: cv[]
 }
 
 const Index = ({ allCvs }: Props)  => {
+  const lowFrameRate = useFPSDetect({ minimumFps: 20 })
   return (
-    <Layout>
-      <Content data={allCvs} />
+    <Layout lowFrameRate={lowFrameRate}>
+      <FPSStats />
+      <Content data={allCvs} lowFrameRate={lowFrameRate}/>
+
     </Layout>
   );
 }

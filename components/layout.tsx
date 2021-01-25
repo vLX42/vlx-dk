@@ -1,9 +1,11 @@
 import Head from 'next/head'
 import AnimatedBackground from './animatedBackground'
 import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 
 type Props = {
   children: React.ReactNode
+  lowFrameRate: boolean
 }
 
 const colors = [
@@ -98,7 +100,7 @@ const colors = [
   { name: 'Pink and Navy Blue', color1: '#FAEBEFFF', color2: '#333D79FF' },
 ]
 
-const Layout = ({ children }: Props) => {
+const Layout = ({ children, lowFrameRate }: Props) => {
   const [color, setColor] = useState({
     name: 'Default',
     color1: '#ffffff',
@@ -128,12 +130,28 @@ const Layout = ({ children }: Props) => {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         {children}
+        {lowFrameRate && (
+          <motion.div
+            initial={{ y: '100vh' }}
+            animate={{ y: 0 }}
+            className="fixed top-0 p-1 pt-2 inset-x-0 shadow-xl bg-white w-3/4 md:w-2/5 mx-auto -mt-1  opacity-50 rounded-lg rounded-t-none text-center"
+          >
+            Low Frame Rate detected turning off Blur Effect
+          </motion.div>
+        )}
         <div className="fixed bottom-0 right-0 text-center text-xs text-gray-400 p-2">
-         Color theme: <i>{color.name}</i>{' '}
-         <button onClick={() => randomColor()} className="focus:outline-none outline-none">🔄</button>
+          Color theme: <i>{color.name}</i>{' '}
+          <button
+            onClick={() => randomColor()}
+            className="focus:outline-none outline-none"
+          >
+            🔄
+          </button>
         </div>
         <div className="fixed bottom-0 left-0 text-center text-xs text-gray-400 p-2">
-         <a href="https://github.com/vLX42/vlx-dk" target="_blank">Source code for this page</a>
+          <a href="https://github.com/vLX42/vlx-dk" target="_blank">
+            Source code for this page
+          </a>
         </div>
       </div>
     </>

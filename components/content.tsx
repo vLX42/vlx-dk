@@ -12,14 +12,16 @@ import FrontPage from './frontpage'
 import Cv from './cv'
 import cv from '../types/cv'
 
+
 const useIsomorphicLayoutEffect =
   typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 import { type } from 'os'
 type contentProps = {
-  data: cv[]
+  data: cv[],
+  lowFrameRate: boolean
 }
-const Content = ({ data }: contentProps) => {
+const Content = ({ data, lowFrameRate }: contentProps) => {
   const scrollRef = useRef<HTMLElement>(null)
   const ghostRef = useRef<HTMLDivElement>(null)
   const [scrollRange, setScrollRange] = useState(0)
@@ -88,7 +90,7 @@ const Content = ({ data }: contentProps) => {
             </motion.div>
             {data.map((cv) => (
               <motion.div animate={controls}>
-                <Cv cv={cv} />
+                <Cv cv={cv} glassEffect={!lowFrameRate} />
               </motion.div>
             ))}
           </div>

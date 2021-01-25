@@ -5,6 +5,11 @@
 
 @layer base {
   .glass {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .background {
     /* @apply backdrop-filter-blur; */
     background: rgb(255, 255, 255,0.25);
     background: linear-gradient(
@@ -18,8 +23,6 @@
     box-shadow: 0 8px 32px 0 rgba(31, 31, 31, 0.37);
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
   }
 }
 

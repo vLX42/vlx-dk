@@ -5,10 +5,11 @@ import StyledMarkdown from './cv.styled'
 
 type cvProps = {
   cv: cv
+  glassEffect: boolean
 }
-const Cv = ({ cv }: cvProps) => (
+const Cv = ({ cv, glassEffect }: cvProps) => (
   <>
-    <div className="thumbnail glass text-gray-700 body-font">
+    <div className={`thumbnail ${glassEffect ? 'glass' : ''} background text-gray-700 body-font`}>
       <div className="flex flex-col items-center px-8 py-8 lg:px-10 lg:py-10 md:flex-row">
         <div className="w-5/6 mb-10 lg:max-w-lg lg:w-full md:w-1/2 md:mb-0">
           {cv.coverImage && (
