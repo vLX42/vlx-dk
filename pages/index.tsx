@@ -1,10 +1,10 @@
 
-import FPSStats from '../components/fpsStats'
+import { FPSStats, useFPSDetect } from 'fps-react'
 import Layout from "../components/layout";
 import Content from "../components/content";
 import { getAllCvs } from '../lib/api'
 import cv from '../types/cv'
-import useFPSDetect from '../components/fpsDetect'
+
 
 type Props = {
   allCvs: cv[]
