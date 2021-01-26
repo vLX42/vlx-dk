@@ -134,12 +134,12 @@ const Layout = ({ children, lowFrameRate }: Props) => {
           <motion.div
             initial={{ y: '100vh' }}
             animate={{ y: 0 }}
-            className="fixed top-0 p-1 pt-2 inset-x-0 shadow-xl bg-white w-3/4 md:w-2/5 mx-auto -mt-1  opacity-50 rounded-lg rounded-t-none text-center"
+            className="fixed top-0 p-1 pt-2 inset-x-0 shadow-xl text-base bg-white w-3/4 md:w-2/5 mx-auto -mt-1  opacity-50 rounded-lg rounded-t-none text-center"
           >
             Low Frame Rate detected turning off Blur Effect
           </motion.div>
         )}
-        <div className="fixed bottom-0 right-0 text-center text-xs text-gray-400 p-2">
+        <div className="fixed bottom-0 right-0 text-center text-base portrait:text-xl text-gray-400 p-2">
           Color theme: <i>{color.name}</i>{' '}
           <button
             onClick={() => randomColor()}
@@ -148,7 +148,7 @@ const Layout = ({ children, lowFrameRate }: Props) => {
             🔄
           </button>
         </div>
-        <div className="fixed bottom-0 left-0 text-center text-xs text-gray-400 p-2">
+        <div className="fixed bottom-0 left-0 text-center text-base portrait:text-xl text-gray-400 p-2">
           <a href="https://github.com/vLX42/vlx-dk" target="_blank">
             Source code for this page
           </a>

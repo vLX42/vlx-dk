@@ -18,13 +18,12 @@ const FrontPage = () => {
   }
   return (
     <>
-      <h1 className="text-5xl ">Who am I?</h1>
-      <h2 className="text-3xl pt-2">
-        Peter Biro a Frontend / Fullstack Developer
-      </h2>
-
-      <div className="mx-auto flex flex-col md:flex-row items-center">
-        <div className="flex flex-col w-full justify-center items-start pt-12 pb-24">
+      <div className="mx-auto flex flex-wrap items-center text-base portrait:text-5xl">
+        <div className="w-2/3 portrait:w-full pb-24 portrait:pb-1">
+          <h1 className="text-5xl portrait:text-9xl ">Who am I?</h1>
+          <h2 className="text-3xl portrait:text-6xl pt-2 pb-6">
+            Peter Biro a Frontend / Fullstack Developer
+          </h2>
           <p className="uppercase tracking-loose">
             I have been working professional with Web Development since 1999
           </p>
@@ -40,8 +39,8 @@ const FrontPage = () => {
             as "Developer"
           </h1>
           <p className="leading-normal mb-4">
-            I'm experienced working with technologies like:{' '}
-            React.js, <a
+            I'm experienced working with technologies like: React.js,{' '}
+            <a
               href="https://nextjs.org/"
               className="underline"
               data-tip
@@ -81,35 +80,38 @@ const FrontPage = () => {
           </p>
 
           <p>
-          Beside my normal work I'm also responsible for the Frontend Community at DFDS, where we every three weeks gather and share experiences or talk about new technologies.
+            Beside my normal work I'm also responsible for the Frontend
+            Community at DFDS, where we every three weeks gather and share
+            experiences or talk about new technologies.
           </p>
           <p>
             <br />
-            <span>Scroll for more or follow me on these media:</span><br />
-        <a href="https://github.com/vLX42/" target="_blank" className="p-1">
-          <Image
-            src="/github.svg"
-            className="shadow align-middle border-none inverted shadow"
-            alt="Github"
-            width={35}
-            height={35}
-          />
-        </a>
+            <span>Scroll for more or follow me on these media:</span>
+            <br />
+            <a href="https://github.com/vLX42/" target="_blank" className="p-1">
+              <Image
+                src="/github.svg"
+                className="shadow align-middle border-none inverted shadow"
+                alt="Github"
+                width={35}
+                height={35}
+              />
+            </a>
 
-        <a
-          href="https://www.linkedin.com/in/vlx42/"
-          target="_blank"
-          className="p-1"
-        >
-          <Image
-            src="/linkedin.svg"
-            className="shadow align-middle border-none inverted shadow"
-            alt="Linkedin"
-            width={35}
-            height={35}
-          />
-        </a>
-      </p>
+            <a
+              href="https://www.linkedin.com/in/vlx42/"
+              target="_blank"
+              className="p-1"
+            >
+              <Image
+                src="/linkedin.svg"
+                className="shadow align-middle border-none inverted shadow"
+                alt="Linkedin"
+                width={35}
+                height={35}
+              />
+            </a>
+          </p>
         </div>
 
         <ReactTooltip id="nest">
@@ -125,9 +127,9 @@ const FrontPage = () => {
           <Image src="/node.svg" width="50" height="50"></Image>
         </ReactTooltip>
 
-        <div className="w-full lg:py-6 text-center">
+        <div className="w-1/3 portrait:w-full lg:py-6 text-center">
           <div className="flex flex-wrap justify-center">
-            <div className="w-6/12 sm:w-4/12 px-4">
+            <div className="p-20">
               <Image
                 src="/profile.jpg"
                 className="shadow rounded-full max-w-full h-auto align-middle border-none"
