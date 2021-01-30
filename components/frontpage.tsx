@@ -127,7 +127,7 @@ const FrontPage = () => {
           <Image src="/node.svg" width="50" height="50"></Image>
         </ReactTooltip>
 
-        <div className="w-1/3 portrait:w-full lg:py-6 text-center">
+        <div className="w-1/3 portrait:w-full portrait:invisible lg:py-6 text-center">
           <div className="flex flex-wrap justify-center">
             <div className="p-20">
               <Image
