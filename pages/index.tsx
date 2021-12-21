@@ -5,7 +5,6 @@ import Content from "../components/content";
 import { getAllCvs } from '../lib/api'
 import cv from '../types/cv'
 
-
 type Props = {
   allCvs: cv[]
 }

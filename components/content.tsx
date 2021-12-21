@@ -7,11 +7,10 @@ import {
   useSpring,
   useAnimation,
 } from 'framer-motion'
-import { useWheel } from 'react-use-gesture'
+import { useWheel } from '@use-gesture/react'
 import FrontPage from './frontpage'
 import Cv from './cv'
 import cv from '../types/cv'
-
 
 const useIsomorphicLayoutEffect =
   typeof window !== 'undefined' ? useLayoutEffect : useEffect;
@@ -21,6 +20,9 @@ type contentProps = {
   data: cv[],
   lowFrameRate: boolean
 }
+
+const physics = { damping: 15, mass: 0.27, stiffness: 55 }
+
 const Content = ({ data, lowFrameRate }: contentProps) => {
   const scrollRef = useRef<HTMLElement>(null)
   const ghostRef = useRef<HTMLDivElement>(null)
@@ -53,16 +55,16 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
     [0, 1],
     [0, -scrollRange + viewportW]
   )
-  const physics = { damping: 15, mass: 0.27, stiffness: 55 }
+
   const spring = useSpring(transform, physics)
 
-  const clamp = (value: number, clampAt = 5) => {
+  const clamp = useCallback((value: number, clampAt = 5) => {
     if (value > 0) {
       return value > clampAt ? clampAt : value
     } else {
       return value < -clampAt ? -clampAt : value
     }
-  }
+  },[])
 
   const controls = useAnimation()
   const wheel = useWheel((event) => {

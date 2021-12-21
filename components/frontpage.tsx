@@ -6,12 +6,14 @@ const FrontPage = () => {
   const bounceTransition = {
     y: {
       duration: 0.4,
-      yoyo: Infinity,
+      yrepeat: Infinity,
+      repeatType: 'reverse',
       ease: 'easeOut',
     },
     backgroundColor: {
       duration: 0,
-      yoyo: Infinity,
+      repeat: Infinity,
+        repeatType: 'reverse',
       ease: 'easeOut',
       repeatDelay: 0.8,
     },

@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import AnimatedBackground from './animatedBackground'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 
 type Props = {
@@ -107,12 +107,12 @@ const Layout = ({ children, lowFrameRate }: Props) => {
     color2: '#ffffff',
   })
 
-  const randomColor = () => {
-    const { name, color1, color2 } = colors[
-      Math.floor(Math.random() * colors.length)
-    ]
+  const randomColor = useCallback(() => {
+    const { name, color1, color2 } =
+      colors[Math.floor(Math.random() * colors.length)]
     setColor({ name, color1, color2 })
-  }
+  }, [])
+
   useEffect(() => {
     randomColor()
   }, [])
