@@ -1,3 +1,4 @@
+import React, { memo } from 'react'
 import Image from 'next/image'
 import cv from '../types/cv'
 import ReactPlayer from 'react-player'
@@ -18,6 +19,7 @@ const Cv = ({ cv, glassEffect }: cvProps) => (
               className="object-cover object-center rounded"
               width="720"
               height="576"
+              alt=""
             ></Image>
           )}
 
@@ -36,4 +38,4 @@ const Cv = ({ cv, glassEffect }: cvProps) => (
   </>
 )
 
-export default Cv
+export default memo(Cv)

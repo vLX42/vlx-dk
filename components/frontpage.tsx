@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import ReactTooltip from 'react-tooltip'
+import { Tooltip as ReactTooltip } from 'react-tooltip'
 
 const FrontPage = () => {
   const bounceTransition = {
@@ -13,7 +13,7 @@ const FrontPage = () => {
     backgroundColor: {
       duration: 0,
       repeat: Infinity,
-        repeatType: 'reverse',
+      repeatType: 'reverse',
       ease: 'easeOut',
       repeatDelay: 0.8,
     },
@@ -24,10 +24,10 @@ const FrontPage = () => {
         <div className="w-2/3 portrait:w-full pb-24 portrait:pb-1">
           <h1 className="text-5xl portrait:text-9xl ">Who am I?</h1>
           <h2 className="text-3xl portrait:text-6xl pt-2 pb-6">
-            Peter Biro a Frontend / Fullstack Developer
+            Peter Biro: A Frontend / Fullstack Developer
           </h2>
           <p className="uppercase tracking-loose">
-            I have been working professional with Web Development since 1999
+            I have been working professionally in Web Development since 1999
           </p>
           <h1 className="my-4">
             I’m currently working for{' '}
@@ -38,10 +38,10 @@ const FrontPage = () => {
             >
               DFDS
             </a>{' '}
-            as "Developer"
+            as Frontend Chapter Lead
           </h1>
           <p className="leading-normal mb-4">
-            I'm experienced working with technologies like: React.js,{' '}
+            I'm experienced in working with technologies like React.js,{' '}
             <a
               href="https://nextjs.org/"
               className="underline"
@@ -78,17 +78,17 @@ const FrontPage = () => {
               Node.js
             </a>
             , Github Actions, Serverless, cypress.io and microservices. In other
-            words a lot of new technologies.
+            words, a lot of new technologies.
           </p>
 
           <p>
-            Beside my normal work I'm also responsible for the Frontend
-            Community at DFDS, where we every three weeks gather and share
-            experiences or talk about new technologies.
+            Besides my regular work, I'm also responsible for the Frontend
+            Community at DFDS. We gather every three weeks to share experiences
+            and discuss new technologies.
           </p>
           <p>
             <br />
-            <span>Scroll for more or follow me on these media:</span>
+            <span>Scroll for more or follow me on these platforms:</span>
             <br />
             <a href="https://github.com/vLX42/" target="_blank" className="p-1">
               <Image

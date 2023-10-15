@@ -30,10 +30,10 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
   const [viewportW, setViewportW] = useState(0)
 
   useIsomorphicLayoutEffect(() => {
-    if (null !== scrollRef.current) {
-      setScrollRange(scrollRef?.current.scrollWidth)
+    if (scrollRef.current !== null) {
+      setScrollRange(scrollRef.current.scrollWidth);
     }
-  }, [scrollRef])
+  }, [scrollRef]);
 
   const onResize = useCallback((entries) => {
     for (let entry of entries) {
@@ -91,7 +91,7 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
               <FrontPage />
             </motion.div>
             {data.map((cv) => (
-              <motion.div animate={controls}>
+              <motion.div animate={controls} key={cv.slug}>
                 <Cv cv={cv} glassEffect={!lowFrameRate} />
               </motion.div>
             ))}
