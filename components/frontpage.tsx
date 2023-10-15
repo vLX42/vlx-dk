@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { Tooltip as ReactTooltip } from 'react-tooltip'
+import ReactTooltip from 'react-tooltip'
 
 const FrontPage = () => {
   const bounceTransition = {
