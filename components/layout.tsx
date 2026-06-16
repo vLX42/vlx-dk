@@ -171,7 +171,34 @@ const Layout = ({ children, lowFrameRate }: Props) => {
       />
       <div className="overscroll-none bg-fixed">
         <Head>
-          <title>Peter Biro - Frontend / FullStack Developer</title>
+          <title>
+            Peter Biro: Frontend Chapter Lead and Senior Full Stack Developer
+          </title>
+          <meta
+            name="description"
+            content="Frontend Chapter Lead and Senior Full Stack Developer with 20+ years building products end to end. React, Next.js, TypeScript, Node.js and .NET, now with an AI-assisted, agentic workflow."
+          />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://vlx.dk/" />
+          <meta
+            property="og:title"
+            content="Peter Biro: Frontend Chapter Lead and Senior Full Stack Developer"
+          />
+          <meta
+            property="og:description"
+            content="20+ years building products end to end. Now leading a frontend chapter and building with an AI-assisted, agentic workflow."
+          />
+          <meta property="og:image" content="https://vlx.dk/og.jpg" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta
+            name="twitter:title"
+            content="Peter Biro: Frontend Chapter Lead and Senior Full Stack Developer"
+          />
+          <meta
+            name="twitter:description"
+            content="20+ years building products end to end. Now leading a frontend chapter and building with an AI-assisted, agentic workflow."
+          />
+          <meta name="twitter:image" content="https://vlx.dk/og.jpg" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
         {children}
