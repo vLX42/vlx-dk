@@ -1,8 +1,12 @@
 import React from 'react'
 import Image from 'next/image'
-import ReactPlayer from 'react-player'
+import dynamic from 'next/dynamic'
 import StyledMarkdown from './cv.styled'
 import cv from '../types/cv'
+
+// Lazy-load the player: react-player/lazy only pulls the player it needs, and
+// next/dynamic keeps it out of the initial bundle (loads when a video mounts).
+const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
 /*
  * Deck content. Each exported piece returns a <Card> (a glass panel that fills
