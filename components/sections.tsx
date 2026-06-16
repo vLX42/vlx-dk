@@ -87,34 +87,67 @@ const MediaSlot = ({
 /* A1. Evolution of my job postings (centerpiece)                      */
 /* ------------------------------------------------------------------ */
 
-const jobPostingPhases = [
+type PhaseMedia = {
+  type: 'image' | 'video'
+  src: string
+  thumb?: string
+  alt?: string
+}
+
+type Phase = {
+  eyebrow: string
+  heading: string
+  copy: string
+  grid: string
+  media: PhaseMedia[]
+}
+
+const jobPostingPhases: Phase[] = [
   {
     eyebrow: 'Phase 1 · Stills',
     heading: 'AI-generated images',
     copy: 'Job ads built from AI stills riffing on Pixar and Disney, made with whatever image model was best at the time (nano banana). A few tries, an afternoon each.',
-    slots: [
-      'Job ad still #1 (full image)',
-      'Job ad still #2 (full image)',
-      'Job ad still #3 (full image)',
+    grid: 'grid grid-cols-3 portrait:grid-cols-1 gap-4 items-start',
+    media: [
+      {
+        type: 'image',
+        src: '/job-senior-frontend-dfds.jpg',
+        alt: 'AI job poster for a Senior Frontend Developer at DFDS',
+      },
+      {
+        type: 'image',
+        src: '/job-dfds-pixar-poster.jpg',
+        alt: 'Pixar-style DFDS job poster',
+      },
+      {
+        type: 'image',
+        src: '/job-frontend-engineer.jpg',
+        alt: 'Cartoon Frontend Engineer job ad',
+      },
     ],
-    grid: 'grid grid-cols-3 portrait:grid-cols-1 gap-4',
-    slotClass: 'aspect-square',
   },
   {
     eyebrow: 'Phase 2 · Motion',
     heading: 'Short AI videos',
     copy: 'The stills started moving. Short AI videos, an afternoon of work, riding each new best model as it landed (Sora, then Veo 3).',
-    slots: ['Short recruitment video (~15s)'],
-    grid: 'grid grid-cols-1 gap-4',
-    slotClass: 'aspect-video',
+    grid: 'grid grid-cols-2 portrait:grid-cols-1 gap-4',
+    media: [
+      { type: 'video', src: '/recruit-ux.mp4', thumb: '/recruit-ux.jpg' },
+      { type: 'video', src: '/recruit-lead1.mp4', thumb: '/recruit-lead1.jpg' },
+    ],
   },
   {
     eyebrow: 'Phase 3 · Productions',
     heading: 'Multi-scene mini campaigns',
     copy: 'Full mini campaigns: multi-scene video from Seedance 2.0 with music from ElevenLabs. Still one afternoon, still solo.',
-    slots: ['Multi-scene campaign video'],
     grid: 'grid grid-cols-1 gap-4',
-    slotClass: 'aspect-video',
+    media: [
+      {
+        type: 'video',
+        src: '/recruit-lead-trailer.mp4',
+        thumb: '/recruit-lead-trailer.jpg',
+      },
+    ],
   },
 ]
 
@@ -146,9 +179,20 @@ export const JobPostingStory = ({ controls, glassEffect }: SectionProps) => (
           <h1 className={title}>{phase.heading}</h1>
           <p className={body}>{phase.copy}</p>
           <div className={phase.grid}>
-            {phase.slots.map((slot) => (
-              <MediaSlot key={slot} label={slot} className={phase.slotClass} />
-            ))}
+            {phase.media.map((m, i) =>
+              m.type === 'video' ? (
+                <LabVideo key={i} url={m.src} thumb={m.thumb} />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={i}
+                  src={m.src}
+                  alt={m.alt || ''}
+                  loading="lazy"
+                  className="w-full h-auto rounded-lg"
+                />
+              )
+            )}
           </div>
         </Panel>
       </motion.div>
