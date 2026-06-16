@@ -72,21 +72,6 @@ const LabVideo = ({
   </div>
 )
 
-// Dashed placeholder for media still to come.
-const MediaSlot = ({
-  label,
-  className = '',
-}: {
-  label: string
-  className?: string
-}) => (
-  <div
-    className={`rounded-lg border-2 border-dashed border-white/50 bg-white/10 flex items-center justify-center text-center text-sm portrait:text-xl text-white/80 p-6 ${className}`}
-  >
-    <span>TODO media: {label}</span>
-  </div>
-)
-
 /* ------------------------------------------------------------------ */
 /* A1. Evolution of my job postings (Story sub-deck)                   */
 /* ------------------------------------------------------------------ */
@@ -193,15 +178,6 @@ export const getStoryCards = (glassEffect: boolean): React.ReactNode[] => [
       <PhaseMediaGrid phase={phase} />
     </Card>
   )),
-  <Card glassEffect={glassEffect} key="story-closing">
-    <p className={eyebrow}>The point</p>
-    <h1 className={title}>The bottleneck has moved to taste and direction.</h1>
-    <p className={body}>
-      As the tools matured, the ambition scaled with them. The hard part is no
-      longer production. It is knowing what to make, and telling a story worth
-      watching.
-    </p>
-  </Card>,
 ]
 
 /* ------------------------------------------------------------------ */
@@ -212,21 +188,20 @@ export const LabCard = ({ glassEffect }: { glassEffect: boolean }) => (
   <Card glassEffect={glassEffect}>
     <p className={eyebrow}>The Lab</p>
     <h1 className={title}>What I&apos;m building now</h1>
-    <p className={body}>
+    <p className="mb-3 text-lg portrait:text-2xl leading-relaxed text-white/85 max-w-2xl">
       Most developers use AI to write code. I build the systems that do it:
-      agents, pipelines and tooling. A few of the things I have shipped, mostly
-      solo and fast.
+      agents, pipelines and harnesses, mostly solo and fast.
     </p>
 
-    <div className="grid grid-cols-3 portrait:grid-cols-1 gap-5 mt-2">
+    <div className="grid grid-cols-2 portrait:grid-cols-1 gap-6 mt-0">
       <div>
         <LabVideo url="/blind-code-promo.mp4" thumb="/blind-code-promo.jpg" />
-        <h2 className="mt-3 text-base portrait:text-3xl font-bold text-white">
+        <h2 className="mt-2 text-lg portrait:text-3xl font-bold text-white">
           blind-code
         </h2>
         <p className="mt-1 text-sm portrait:text-xl text-white/75">
-          A game for coders, made for events. React + Convex on Vercel. The promo
-          is built in Remotion from real app elements.{' '}
+          A game for coders, made for events. React + Convex on Vercel, promo
+          built in Remotion.{' '}
           <a
             className={link}
             href="https://blind-code.vlx.dk"
@@ -240,24 +215,13 @@ export const LabCard = ({ glassEffect }: { glassEffect: boolean }) => (
 
       <div>
         <LabVideo url="/smelt.mp4" thumb="/smelt.jpg" />
-        <h2 className="mt-3 text-base portrait:text-3xl font-bold text-white">
+        <h2 className="mt-2 text-lg portrait:text-3xl font-bold text-white">
           Smelt
         </h2>
         <p className="mt-1 text-sm portrait:text-xl text-white/75">
-          A personal harness: a multi-agent PR-drafting pipeline. A Tauri app over
-          the Copilot CLI SDK, with architect, reviewer and test-writer agents
-          behind quality gates. Clip is a 15x speed-run.
-        </p>
-      </div>
-
-      <div>
-        <MediaSlot label="Columbo clip" className="aspect-video" />
-        <h2 className="mt-3 text-base portrait:text-3xl font-bold text-white">
-          Columbo
-        </h2>
-        <p className="mt-1 text-sm portrait:text-xl text-white/75">
-          A chaos-board view of an agent&apos;s internals (Vite, React, Hono, raw
-          OpenAI), built to make a running agent&apos;s decisions legible.
+          A multi-agent PR-drafting pipeline: a Tauri app over the Copilot CLI SDK,
+          with architect, reviewer and test-writer agents behind quality gates.
+          The clip is a 15x speed-run.
         </p>
       </div>
     </div>
@@ -268,40 +232,30 @@ export const LabCard = ({ glassEffect }: { glassEffect: boolean }) => (
 /* A5. Idea to result (timeboxes)                                      */
 /* ------------------------------------------------------------------ */
 
-const ideaCards = [
-  { time: '~30 min', what: 'blind-code promo video', stack: 'Remotion, AI-assisted' },
-  {
-    time: 'An afternoon',
-    what: 'AI recruitment campaign',
-    stack: 'Seedance 2.0 + ElevenLabs',
-  },
-]
-
 export const IdeaCard = ({ glassEffect }: { glassEffect: boolean }) => (
   <Card glassEffect={glassEffect}>
     <p className={eyebrow}>Idea to result</p>
-    <h1 className={title}>Speed is the signature</h1>
-    <p className={body}>
-      Concept to shipped artifact, timeboxed. The point is not the tool. It is
-      how fast a good idea becomes real.
-    </p>
-    <div className="grid grid-cols-2 portrait:grid-cols-1 gap-6">
-      {ideaCards.map((card, i) => (
-        <div
-          key={i}
-          className="rounded-lg bg-white/10 border border-white/20 p-5 flex flex-col"
-        >
-          <span className="text-3xl portrait:text-5xl font-bold text-white">
-            {card.time}
-          </span>
-          <span className="mt-2 text-base portrait:text-2xl text-white/90">
-            {card.what}
-          </span>
-          <span className="mt-1 text-sm portrait:text-xl text-white/70">
-            {card.stack}
-          </span>
-        </div>
-      ))}
+    <h1 className={title}>The prompt is the craft now</h1>
+    <div className="flex portrait:flex-col items-center gap-8 lg:gap-12">
+      <div className="w-1/2 portrait:w-full">
+        <LabVideo url="/blind-code-promo.mp4" thumb="/blind-code-promo.jpg" />
+      </div>
+      <div className="w-1/2 portrait:w-full">
+        <p className="mb-5 text-base portrait:text-2xl leading-relaxed text-white/85">
+          I made this 30-second promo for blind-code in about 20 minutes, with
+          three prompts. Remotion reused the real components from the site, so the
+          time went into direction, not keyframes: what to show, the pacing, the
+          music. The model fills a blank. It does not take a seat.
+        </p>
+        <ol className="space-y-2 text-sm portrait:text-xl text-white/70 list-decimal list-inside">
+          <li>
+            A 20s promo of the front page, editor and voting, with power mode.
+            Use Remotion.
+          </li>
+          <li>Here is the music. Run it about 25s, then fade.</li>
+          <li>Here is the live URL. Pull from it, fade the music at the end.</li>
+        </ol>
+      </div>
     </div>
   </Card>
 )
