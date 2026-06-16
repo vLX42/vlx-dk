@@ -1,13 +1,13 @@
 ---
 coverImage: '/dfds.png'
 year: '2020'
-technology: 'Next.Js, React, Redux, Nest.Js, Node.Js, TypeScript'
+technology: 'Next.js, React, Redux, Nest.js, Node.js, TypeScript'
 ---
 
-## 2019-? Frontend Developer
+## 2023-Present Frontend Chapter Lead · 2019-2023 Frontend Developer
 
 # DFDS A/S
 
-At DFDS, I'm working on the Freight B2B solution, besides some on-and-off maintenance on the old .Net MVC solution. We're in the process of rewriting the application to use a new microservice backend. We are responsible for developing a new Frontend and a BFF (Backend for Frontend). We're using React.Js/Next.Js for the frontend and Nest.js for our backend.
+At DFDS, I lead the Frontend Chapter while staying hands-on with the Freight B2B platform. We rebuilt the product on a microservice backend — a Next.js multi-zone monorepo (Control Tower) on the frontend and a BFF (Backend for Frontend) in Nest.js — alongside on-and-off maintenance of the legacy .NET MVC solution. More recently I've worked on AI document ingestion in MyFreight, turning unstructured shipping documents into structured data.
 
-We're working with a Serverless setup and a DevOps flow in GitHub Actions, with automated tests in Jest and ~~Cypress.io~~ Playwright.
+We run a Serverless setup with a DevOps flow in GitHub Actions, with automated tests in Jest and Playwright. As Chapter Lead I also set frontend direction and standards across teams, and increasingly build with an AI-assisted, agentic workflow.

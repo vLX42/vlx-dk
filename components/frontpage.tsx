@@ -24,24 +24,24 @@ const FrontPage = () => {
         <div className="w-2/3 portrait:w-full pb-24 portrait:pb-1">
           <h1 className="text-5xl portrait:text-9xl ">Who am I?</h1>
           <h2 className="text-3xl portrait:text-6xl pt-2 pb-6">
-            Peter Biro: A Frontend / Fullstack Developer
+            Peter Biro — Frontend Chapter Lead &amp; Full-Stack Developer
           </h2>
           <p className="uppercase tracking-loose">
-            I have been working professionally in Web Development since 1999
+            I have been working professionally in Web Development since 1998
           </p>
           <h1 className="my-4">
-            I’m currently working for{' '}
+            Since October 2023 I’ve been Frontend Chapter Lead at{' '}
             <a
               href="https://www.dfds.com"
               target="_blank"
               className="underline"
             >
               DFDS
-            </a>{' '}
-            as Frontend Chapter Lead
+            </a>
+            , setting frontend direction across teams while staying hands-on.
           </h1>
           <p className="leading-normal mb-4">
-            I'm experienced in working with technologies like React.js,{' '}
+            I build across the stack with React.js,{' '}
             <a
               href="https://nextjs.org/"
               className="underline"
@@ -68,7 +68,7 @@ const FrontPage = () => {
             >
               Redux
             </a>
-            , Swr, TypeScript, .net Core, C#, ES6,{' '}
+            , TypeScript, .NET Core, C#,{' '}
             <a
               href="https://nodejs.org/"
               data-tip
@@ -77,14 +77,15 @@ const FrontPage = () => {
             >
               Node.js
             </a>
-            , Github Actions, Serverless, cypress.io and microservices. In other
-            words, a lot of new technologies.
+            , GitHub Actions, Serverless and microservices — increasingly with an
+            AI-assisted, agentic workflow that takes an idea from concept to a
+            shipped result in a fraction of the usual time.
           </p>
 
           <p>
-            Besides my regular work, I'm also responsible for the Frontend
-            Community at DFDS. We gather every three weeks to share experiences
-            and discuss new technologies.
+            Besides my regular work, I run the Frontend Community at DFDS. We
+            gather every three weeks to share experiences and explore where
+            tooling — and AI — is taking our craft next.
           </p>
           <p>
             <br />
@@ -94,7 +95,7 @@ const FrontPage = () => {
               <Image
                 src="/github.svg"
                 className="shadow align-middle border-none inverted shadow"
-                alt="Github"
+                alt="GitHub"
                 width={35}
                 height={35}
               />
