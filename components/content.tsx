@@ -1,4 +1,11 @@
-import React, { useRef, useState, useLayoutEffect, useEffect, useCallback } from 'react'
+import React, {
+  useRef,
+  useState,
+  useLayoutEffect,
+  useEffect,
+  useCallback,
+  useMemo,
+} from 'react'
 import ResizeObserver from 'resize-observer-polyfill'
 import {
   motion,
@@ -9,85 +16,170 @@ import {
 } from 'framer-motion'
 import { useWheel } from '@use-gesture/react'
 import FrontPage from './frontpage'
-import Cv from './cv'
-import { JobPostingStory, Lab, IdeaToResult } from './sections'
+import { getStoryCards, LabCard, IdeaCard, CvCard } from './sections'
 import PanelNav from './panelNav'
 import cv from '../types/cv'
 
 const useIsomorphicLayoutEffect =
-  typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+  typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
-import { type } from 'os'
 type contentProps = {
-  data: cv[],
+  data: cv[]
   lowFrameRate: boolean
 }
 
 const physics = { damping: 15, mass: 0.27, stiffness: 55 }
 
+// How much vertical scroll each sub-card (frame) gets, as a fraction of the
+// viewport height. Higher = slower, more deliberate flipping.
+const SCROLL_PER_FRAME = 0.85
+
 const Content = ({ data, lowFrameRate }: contentProps) => {
+  const glassEffect = !lowFrameRate
   const scrollRef = useRef<HTMLElement>(null)
   const ghostRef = useRef<HTMLDivElement>(null)
-  const [scrollRange, setScrollRange] = useState(0)
   const [viewportW, setViewportW] = useState(0)
+  const [viewportH, setViewportH] = useState(800)
+  const [stopOffsets, setStopOffsets] = useState<number[]>([])
 
-  useIsomorphicLayoutEffect(() => {
-    if (scrollRef.current !== null) {
-      setScrollRange(scrollRef.current.scrollWidth);
-    }
-  }, [scrollRef]);
+  // The top-level deck. Each stop holds one or more stacked sub-cards.
+  const stops = useMemo(
+    () => [
+      {
+        label: 'Intro',
+        cards: [
+          <div key="intro" className="absolute inset-0 text-white">
+            <FrontPage />
+          </div>,
+        ],
+      },
+      { label: 'Story', cards: getStoryCards(glassEffect) },
+      { label: 'Lab', cards: [<LabCard key="lab" glassEffect={glassEffect} />] },
+      { label: 'Idea', cards: [<IdeaCard key="idea" glassEffect={glassEffect} />] },
+      {
+        label: 'Experience',
+        cards: data.map((c) => (
+          <CvCard key={c.slug} cv={c} glassEffect={glassEffect} />
+        )),
+      },
+    ],
+    [data, glassEffect]
+  )
 
-  const onResize = useCallback((entries) => {
-    for (let entry of entries) {
-      setViewportW(entry.contentRect.width)
+  // Flatten into frames (one per sub-card) and record where each stop starts.
+  const { frames, firstFrame } = useMemo(() => {
+    const frames: { si: number; sj: number }[] = []
+    const firstFrame: number[] = []
+    let count = 0
+    stops.forEach((s, si) => {
+      firstFrame[si] = count
+      s.cards.forEach((_, sj) => frames.push({ si, sj }))
+      count += s.cards.length
+    })
+    return { frames, firstFrame }
+  }, [stops])
+
+  const F = frames.length
+
+  // Latest measured stop offsets, read inside the scroll transform.
+  const offsetsRef = useRef<number[]>([])
+  offsetsRef.current = stopOffsets
+  const framesRef = useRef(frames)
+  framesRef.current = frames
+
+  const { scrollYProgress } = useViewportScroll()
+
+  // Horizontal position: a step function of the current stop. Flat (held) while
+  // flipping a sub-deck, ramps between stops. The spring smooths the slide.
+  const xTransform = useTransform(scrollYProgress, (v) => {
+    const offs = offsetsRef.current
+    const fr = framesRef.current
+    if (!offs.length || fr.length < 2) return 0
+    const pos = Math.min(Math.max(v, 0), 1) * (fr.length - 1)
+    const i0 = Math.floor(pos)
+    const i1 = Math.min(i0 + 1, fr.length - 1)
+    const t = pos - i0
+    const x0 = -(offs[fr[i0].si] || 0)
+    const x1 = -(offs[fr[i1].si] || 0)
+    return x0 + (x1 - x0) * t
+  })
+  const spring = useSpring(xTransform, physics)
+
+  // Which frame we're closest to (drives sub-card switching + nav).
+  const [activeFrame, setActiveFrame] = useState(0)
+  useEffect(() => {
+    const update = (v: number) => {
+      const idx = Math.round(Math.min(Math.max(v, 0), 1) * (F - 1))
+      setActiveFrame(Math.min(Math.max(idx, 0), F - 1))
     }
+    update(scrollYProgress.get())
+    const unsub = scrollYProgress.onChange(update)
+    return () => unsub()
+  }, [scrollYProgress, F])
+
+  // Track viewport width (retrigger measurement) and height (scroll length).
+  const onResize = useCallback((entries: any) => {
+    for (let entry of entries) setViewportW(entry.contentRect.width)
   }, [])
 
   useIsomorphicLayoutEffect(() => {
-    const resizeObserver = new ResizeObserver((entries) => onResize(entries))
-    if (null !== ghostRef.current) {
-      resizeObserver.observe(ghostRef.current)
-    }
-    return () => resizeObserver.disconnect()
+    const ro = new ResizeObserver((entries) => onResize(entries))
+    if (ghostRef.current) ro.observe(ghostRef.current)
+    return () => ro.disconnect()
   }, [onResize])
 
-  const { scrollYProgress, scrollY } = useViewportScroll()
-  const transform = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, -scrollRange + viewportW]
-  )
+  useIsomorphicLayoutEffect(() => {
+    if (typeof window !== 'undefined') setViewportH(window.innerHeight)
+  }, [viewportW])
 
-  const spring = useSpring(transform, physics)
+  // Measure each deck-stop's layout position for the horizontal transform.
+  useIsomorphicLayoutEffect(() => {
+    const container = scrollRef.current?.querySelector('.thumbnails')
+    if (!container) return
+    const kids = Array.from(container.children) as HTMLElement[]
+    setStopOffsets(kids.map((k) => k.offsetLeft))
+  }, [stops, viewportW])
 
-  const clamp = useCallback((value: number, clampAt = 5) => {
-    if (value > 0) {
-      return value > clampAt ? clampAt : value
-    } else {
-      return value < -clampAt ? -clampAt : value
-    }
-  },[])
+  const ghostHeight = Math.max(F, 2) * SCROLL_PER_FRAME * viewportH
 
-  const navLabels = [
-    'Home',
-    'Story',
-    'Stills',
-    'Motion',
-    'Productions',
-    'The point',
-    'Lab',
-    'Idea to result',
-    ...data.map((c) => c.year || 'Experience'),
-  ]
-
+  // Wheel tilt (kept from the original interaction).
   const controls = useAnimation()
+  const clamp = useCallback(
+    (value: number, clampAt = 5) =>
+      value > 0 ? Math.min(value, clampAt) : Math.max(value, -clampAt),
+    []
+  )
   const wheel = useWheel((event) => {
-     controls.start({
+    controls.start({
       transform: `perspective(800px) rotateY(${
         event.wheeling ? clamp(event.delta[1]) : 0
       }deg)`,
     })
   })
+
+  // Jump to a given frame, with a brief tilt toward the direction of travel.
+  const goToFrame = useCallback(
+    (f: number) => {
+      const clamped = Math.min(Math.max(f, 0), F - 1)
+      const dir = Math.sign(clamped - activeFrame)
+      if (dir !== 0) {
+        controls.start({
+          transform: `perspective(800px) rotateY(${dir * 5}deg)`,
+        })
+        window.setTimeout(() => {
+          controls.start({ transform: `perspective(800px) rotateY(0deg)` })
+        }, 260)
+      }
+      const maxY = document.documentElement.scrollHeight - window.innerHeight
+      const p = F > 1 ? clamped / (F - 1) : 0
+      window.scrollTo({ top: p * maxY, behavior: 'smooth' })
+    },
+    [F, activeFrame, controls]
+  )
+
+  const activeStop = frames[activeFrame]?.si ?? 0
+  const subActive = activeFrame - (firstFrame[activeStop] ?? 0)
+  const subCount = stops[activeStop]?.cards.length ?? 1
 
   return (
     <>
@@ -98,30 +190,54 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
           className="thumbnails-container"
         >
           <div className="thumbnails">
-            <motion.div
-              animate={controls}
-              className="thumbnail text-white relative"
-            >
-              <FrontPage />
-            </motion.div>
-            <JobPostingStory controls={controls} glassEffect={!lowFrameRate} />
-            <Lab controls={controls} glassEffect={!lowFrameRate} />
-            <IdeaToResult controls={controls} glassEffect={!lowFrameRate} />
-            {data.map((cv) => (
-              <motion.div animate={controls} key={cv.slug}>
-                <Cv cv={cv} glassEffect={!lowFrameRate} />
-              </motion.div>
-            ))}
+            {stops.map((s, si) => {
+              const stopActiveSub = Math.min(
+                Math.max(activeFrame - firstFrame[si], 0),
+                s.cards.length - 1
+              )
+              return (
+                <motion.div
+                  key={si}
+                  animate={controls}
+                  className="thumbnail relative"
+                >
+                  {s.cards.map((card, sj) => {
+                    const isActive = sj === stopActiveSub
+                    return (
+                      <motion.div
+                        key={sj}
+                        className="absolute inset-0"
+                        initial={false}
+                        animate={{
+                          opacity: isActive ? 1 : 0,
+                          y: isActive ? '0%' : sj < stopActiveSub ? '-6%' : '6%',
+                          scale: isActive ? 1 : 0.98,
+                        }}
+                        transition={{ duration: 0.45, ease: 'easeOut' }}
+                        style={{
+                          zIndex: isActive ? 2 : 1,
+                          pointerEvents: isActive ? 'auto' : 'none',
+                        }}
+                      >
+                        {card}
+                      </motion.div>
+                    )
+                  })}
+                </motion.div>
+              )
+            })}
           </div>
         </motion.section>
       </div>
-      <div ref={ghostRef} style={{ height: scrollRange }} className="ghost" />
+      <div ref={ghostRef} style={{ height: ghostHeight }} className="ghost" />
       <PanelNav
-        scrollRef={scrollRef}
-        scrollRange={scrollRange}
-        viewportW={viewportW}
-        labels={navLabels}
-        controls={controls}
+        labels={stops.map((s) => s.label)}
+        activeIndex={activeStop}
+        subActive={subActive}
+        subCount={subCount}
+        onSelect={(si) => goToFrame(firstFrame[si])}
+        onPrev={() => goToFrame(activeFrame - 1)}
+        onNext={() => goToFrame(activeFrame + 1)}
       />
     </>
   )

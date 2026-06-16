@@ -1,147 +1,91 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 /*
- * Jump-to-panel navigation for the horizontal scroll.
- *
- * The scroll is driven by vertical scrollY mapped to a horizontal transform
- * (see content.tsx). To jump to a panel we measure each panel's layout left,
- * convert it to a scroll progress, and window.scrollTo the matching scrollY.
- * The existing spring then animates the horizontal move for free.
+ * Deck navigation. Shows one dot per top-level stop plus, when the active stop
+ * is a sub-deck, a row of pips for its sub-cards. Arrows and the left/right keys
+ * step frame-by-frame (flip within a sub-deck, then advance to the next stop).
  */
 
 type Props = {
-  scrollRef: React.RefObject<HTMLElement>
-  scrollRange: number
-  viewportW: number
-  labels?: string[]
-  controls?: any
+  labels: string[]
+  activeIndex: number
+  subActive: number
+  subCount: number
+  onSelect: (i: number) => void
+  onPrev: () => void
+  onNext: () => void
 }
 
 const PanelNav = ({
-  scrollRef,
-  scrollRange,
-  viewportW,
-  labels = [],
-  controls,
+  labels,
+  activeIndex,
+  subActive,
+  subCount,
+  onSelect,
+  onPrev,
+  onNext,
 }: Props) => {
-  const [lefts, setLefts] = useState<number[]>([])
-  const [active, setActive] = useState(0)
-
-  const maxX = Math.max(scrollRange - viewportW, 1)
-
-  // Measure each panel's layout position once sizes are known.
   useEffect(() => {
-    const container = scrollRef.current?.querySelector('.thumbnails')
-    if (!container) return
-    const children = Array.from(container.children) as HTMLElement[]
-    setLefts(children.map((c) => c.offsetLeft))
-  }, [scrollRef, scrollRange, viewportW])
-
-  const goTo = useCallback(
-    (i: number) => {
-      const target = lefts[i]
-      if (target == null) return
-
-      // Tilt the panels toward the direction of travel, then settle, mirroring
-      // the wheel-gesture tilt so nav jumps feel like the same interaction.
-      const dir = Math.sign(i - active)
-      if (dir !== 0 && controls) {
-        controls.start({
-          transform: `perspective(800px) rotateY(${dir * 5}deg)`,
-        })
-        window.setTimeout(() => {
-          controls.start({ transform: `perspective(800px) rotateY(0deg)` })
-        }, 260)
-      }
-
-      const maxY = document.documentElement.scrollHeight - window.innerHeight
-      const p = Math.min(Math.max(target / maxX, 0), 1)
-      window.scrollTo({ top: p * maxY, behavior: 'smooth' })
-    },
-    [lefts, maxX, active, controls]
-  )
-
-  // Track which panel is closest to the current scroll position.
-  useEffect(() => {
-    if (!lefts.length) return
-    const onScroll = () => {
-      const maxY = document.documentElement.scrollHeight - window.innerHeight
-      if (maxY <= 0) return
-      const x = (window.scrollY / maxY) * maxX
-      let idx = 0
-      let best = Infinity
-      lefts.forEach((l, i) => {
-        const d = Math.abs(l - x)
-        if (d < best) {
-          best = d
-          idx = i
-        }
-      })
-      setActive(idx)
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    onScroll()
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [lefts, maxX])
-
-  // Left / right arrow keys jump between panels.
-  useEffect(() => {
-    if (!lefts.length) return
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') {
         e.preventDefault()
-        goTo(Math.min(active + 1, lefts.length - 1))
+        onNext()
       } else if (e.key === 'ArrowLeft') {
         e.preventDefault()
-        goTo(Math.max(active - 1, 0))
+        onPrev()
       }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [active, lefts.length, goTo])
+  }, [onNext, onPrev])
 
-  if (lefts.length < 2) return null
+  if (labels.length < 2) return null
 
   const btn =
-    'flex items-center justify-center w-8 h-8 rounded-full text-white text-lg leading-none bg-white/15 hover:bg-white/30 focus:outline-none disabled:opacity-30 transition'
+    'flex items-center justify-center w-8 h-8 rounded-full text-white text-lg leading-none bg-white/15 hover:bg-white/30 focus:outline-none transition'
 
   return (
     <nav
       aria-label="Section navigation"
       className="glass background fixed bottom-3 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-3 py-2 font-poppins"
     >
-      <button
-        className={btn}
-        onClick={() => goTo(Math.max(active - 1, 0))}
-        disabled={active === 0}
-        aria-label="Previous panel"
-      >
+      <button className={btn} onClick={onPrev} aria-label="Previous">
         ‹
       </button>
 
       <div className="flex items-center gap-2">
-        {lefts.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => goTo(i)}
-            aria-label={labels[i] || `Panel ${i + 1}`}
-            aria-current={i === active}
-            title={labels[i] || `Panel ${i + 1}`}
-            className={`h-2 rounded-full transition-all focus:outline-none ${
-              i === active
-                ? 'w-5 bg-white'
-                : 'w-2 bg-white/40 hover:bg-white/70'
-            }`}
-          />
-        ))}
+        {labels.map((label, i) => {
+          const isActive = i === activeIndex
+          return (
+            <div key={i} className="flex items-center gap-2">
+              <button
+                onClick={() => onSelect(i)}
+                aria-label={label}
+                aria-current={isActive}
+                title={label}
+                className={`h-2 rounded-full transition-all focus:outline-none ${
+                  isActive ? 'w-6 bg-white' : 'w-2 bg-white/40 hover:bg-white/70'
+                }`}
+              />
+              {/* Sub-deck pips for the active stop */}
+              {isActive && subCount > 1 && (
+                <span className="flex items-center gap-1">
+                  {Array.from({ length: subCount }).map((_, s) => (
+                    <span
+                      key={s}
+                      className={`h-1.5 w-1.5 rounded-full ${
+                        s === subActive ? 'bg-white' : 'bg-white/30'
+                      }`}
+                    />
+                  ))}
+                </span>
+              )}
+            </div>
+          )
+        })}
       </div>
 
-      <button
-        className={btn}
-        onClick={() => goTo(Math.min(active + 1, lefts.length - 1))}
-        disabled={active === lefts.length - 1}
-        aria-label="Next panel"
-      >
+      <button className={btn} onClick={onNext} aria-label="Next">
         ›
       </button>
     </nav>
