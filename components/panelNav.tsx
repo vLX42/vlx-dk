@@ -14,9 +14,16 @@ type Props = {
   scrollRange: number
   viewportW: number
   labels?: string[]
+  controls?: any
 }
 
-const PanelNav = ({ scrollRef, scrollRange, viewportW, labels = [] }: Props) => {
+const PanelNav = ({
+  scrollRef,
+  scrollRange,
+  viewportW,
+  labels = [],
+  controls,
+}: Props) => {
   const [lefts, setLefts] = useState<number[]>([])
   const [active, setActive] = useState(0)
 
@@ -34,11 +41,24 @@ const PanelNav = ({ scrollRef, scrollRange, viewportW, labels = [] }: Props) => 
     (i: number) => {
       const target = lefts[i]
       if (target == null) return
+
+      // Tilt the panels toward the direction of travel, then settle, mirroring
+      // the wheel-gesture tilt so nav jumps feel like the same interaction.
+      const dir = Math.sign(i - active)
+      if (dir !== 0 && controls) {
+        controls.start({
+          transform: `perspective(800px) rotateY(${dir * 5}deg)`,
+        })
+        window.setTimeout(() => {
+          controls.start({ transform: `perspective(800px) rotateY(0deg)` })
+        }, 260)
+      }
+
       const maxY = document.documentElement.scrollHeight - window.innerHeight
       const p = Math.min(Math.max(target / maxX, 0), 1)
       window.scrollTo({ top: p * maxY, behavior: 'smooth' })
     },
-    [lefts, maxX]
+    [lefts, maxX, active, controls]
   )
 
   // Track which panel is closest to the current scroll position.

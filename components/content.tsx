@@ -128,6 +128,7 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
         scrollRange={scrollRange}
         viewportW={viewportW}
         labels={navLabels}
+        controls={controls}
       />
     </>
   )
