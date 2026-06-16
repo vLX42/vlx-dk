@@ -5,10 +5,10 @@ year: '2017'
 technology: 'React, Redux, .NET Core'
 ---
 
-## 2002-2019 - System Developer and Partner
+## 2016-2017 · An early bet on React
 
-# The "SiteWorks" Years - Part II
+# Contracts, automated
 
-Often, some of our larger customers at SiteWorks required custom solutions. For example, <a href="https://www.artisten.dk/" target="_blank">Dansk Artist Forbund</a> needed an online solution for their members to create contracts between artists and venues.
+When our larger SiteWorks clients needed custom software, I built it. Dansk Artist Forbund needed a way for members to create binding contracts between artists and venues, so I built one: a guided multi-step form that adapts to the user's input, runs through an approval flow, and ends in a generated PDF contract.
 
-This was my first React.js project, and the backend was built in .NET Core. The application features a comprehensive form; based on user input, different options become available. The process also includes an approval mechanism that culminates in a binding PDF contract.
+This was my first React project, in 2016, with a .NET Core backend. A deliberate early bet on a stack that has defined the rest of my career.

@@ -5,10 +5,10 @@ year: '2016'
 technology: 'React, Redux, .NET Core'
 ---
 
-## 2002-2019 - System Developer and Partner
+## 2016 · Complex workflows, made simple
 
-# The "SiteWorks" Years - Part III
+# A 50-page guide in software
 
-Another customer, Danske Fodterapeuter, also required a contract solution, but their workflow was even more complex. They had a tenant contract, and clinic owners needed to follow a 50-page guide to construct it. I developed a similar solution for them, but with a different workflow and additional helper functions.
+Danske Fodterapeuter had a harder problem: clinic owners had to follow a 50-page guide to build a valid tenancy contract. I turned that guide into software, with a guided workflow, helper functions that did the heavy lifting, and authenticated access for logged-in members.
 
-This solution was also built using React.js, Redux, and .NET Core. Since it was only accessible to users logged into the main page, user authentication features were added.
+Same modern stack, React, Redux and .NET Core, applied to a genuinely gnarly domain. The kind of work where the value is in making something complex feel obvious.

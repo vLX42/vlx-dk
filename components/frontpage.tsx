@@ -59,16 +59,17 @@ const FrontPage = () => {
           >
             <p>
               More than two decades in: I co-founded a software company and shipped
-              a CMS that still runs 1,500+ sites, then led the rewrite of DFDS{'’'}s
-              B2B freight platform onto a modern microservice stack. Today I run
-              the Frontend Chapter at DFDS, setting direction across teams while
-              staying in the code.
+              a CMS used on 1,500+ sites over its life, then led the rewrite of
+              DFDS{'’'}s B2B freight platform onto a modern microservice stack.
+              Today I run the Frontend Chapter for the Ferry tribe at DFDS,
+              setting direction across teams while staying in the code.
             </p>
             <p>
               What is different now is how I build. Most of my work runs through an
               AI-assisted, agentic workflow that takes an idea to a shipped result
-              in a fraction of the usual time. I write the agents, not just the
-              code.
+              in a fraction of the usual time. I build the harness the agents run
+              in, not just the code, and I still own the architecture and
+              everything that ships.
             </p>
           </motion.div>
 

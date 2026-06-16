@@ -1,15 +1,13 @@
 ---
 coverImage: '/aidsfondet.png'
 year: '2019'
-technology: '.Net MVC, C#, SQL Server, ASP, jQuery, ExtJs'
+technology: '.NET MVC, C#, SQL Server, Classic ASP'
 ---
 
-## 2002-2019 - System Developer and Partner
+## 2002-2019 · Co-founder and Lead Developer
 
-# The "SiteWorks" Years - Part I
+# SiteWorks
 
-My three colleagues and I founded SiteWorks in 2002 after we had the opportunity to buy out the product we had started developing under Telia Internet. For the next 16 years, I was the main developer behind two custom CMS systems that have been used on more than 1,500 sites over time. Both systems were built on a SQL Server database; the old CMS was built in Classic ASP, and a newer rewrite was written in .Net MVC C#.
+Four of us founded SiteWorks in 2002, buying out the product we had started building inside Telia Internet. For the next 16 years I was the lead developer behind two custom CMS platforms that were used on more than 1,500 sites over their lifetime, by names like IBM, Deloitte, Dong Energy and Vækstfonden.
 
-The CMS is still in use by major sites like <a href="https://aidsfondet.dk/" target="_blank">Aidsfondet.dk</a>, <a href="https://www.artisten.dk/" target="_blank">Artisten.dk</a>, <a href="https://www.bikestardo.com/" target="_blank">Bikestardo.com</a>, and <a href="https://webshop.fodterapeut.dk/" target="_blank">Danske Fodterapeuter WebShop</a>.
-
-The system is also utilized for event registrations and has been used by Danske Bank, Deloitte, Vækstfonden; see more examples <a href="http://www.tilmeldingssystem.dk/Cases" target="_blank">here</a>.
+Both were built on SQL Server: the original in Classic ASP, the rewrite in .NET MVC and C#. Sites built on them are still live today, including <a href="https://aidsfondet.dk/" target="_blank">Aidsfondet.dk</a> and <a href="https://www.artisten.dk/" target="_blank">Artisten.dk</a>, plus an event-registration system used by large organisations. See more <a href="http://www.tilmeldingssystem.dk/Cases" target="_blank">cases here</a>.

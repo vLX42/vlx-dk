@@ -35,8 +35,10 @@ export const Card = ({
       bare ? '' : glassEffect ? 'background glass' : 'card-solid'
     }`}
   >
-    <div className="deck-text relative z-10 px-8 py-8 lg:px-12 lg:py-12 h-full flex flex-col justify-center overflow-y-auto">
-      {children}
+    <div className="deck-text relative z-10 h-full overflow-y-auto">
+      <div className="min-h-full flex flex-col justify-center px-8 py-8 lg:px-12 lg:py-10">
+        {children}
+      </div>
     </div>
   </div>
 )
@@ -203,14 +205,20 @@ export const LabCard = ({ glassEffect }: { glassEffect: boolean }) => (
     <p className={eyebrow}>The Lab</p>
     <h1 className={title}>What I&apos;m building now</h1>
     <p className={body}>
-      Agentic and AI-assisted projects, built fast and mostly solo. The
-      recruitment campaigns in the Story deck are part of the same habit.
+      Most developers use AI to write code. I build the systems that do it:
+      agents, pipelines and tooling. A few of the things I have shipped, mostly
+      solo and fast.
     </p>
 
-    <div className="grid grid-cols-2 portrait:grid-cols-1 gap-6">
+    <div className="grid grid-cols-3 portrait:grid-cols-1 gap-5 mt-2">
       <div>
-        <h2 className="mb-2 text-lg portrait:text-3xl font-bold text-white">
-          blind-code{' '}
+        <LabVideo url="/blind-code-promo.mp4" thumb="/blind-code-promo.jpg" />
+        <h2 className="mt-3 text-base portrait:text-3xl font-bold text-white">
+          blind-code
+        </h2>
+        <p className="mt-1 text-sm portrait:text-xl text-white/75">
+          A game for coders, made for events. React + Convex on Vercel. The promo
+          is built in Remotion from real app elements.{' '}
           <a
             className={link}
             href="https://blind-code.vlx.dk"
@@ -219,37 +227,30 @@ export const LabCard = ({ glassEffect }: { glassEffect: boolean }) => (
           >
             blind-code.vlx.dk
           </a>
-        </h2>
-        <p className="mb-3 text-sm portrait:text-xl text-white/80">
-          A game for coders and web developers, a fun thing to do at an event.
-          React and Convex, hosted on Vercel. The 30 second promo below is built
-          in Remotion from real elements of the app.
         </p>
-        <LabVideo url="/blind-code-promo.mp4" thumb="/blind-code-promo.jpg" />
       </div>
 
       <div>
-        <h2 className="mb-2 text-lg portrait:text-3xl font-bold text-white">
+        <LabVideo url="/smelt.mp4" thumb="/smelt.jpg" />
+        <h2 className="mt-3 text-base portrait:text-3xl font-bold text-white">
           Smelt
         </h2>
-        <p className="mb-3 text-sm portrait:text-xl text-white/80">
-          A personal playground: a multi-agent PR-drafting pipeline. A Tauri
-          desktop app wrapping the Copilot CLI SDK, with architect, reviewer and
-          test-writer agents behind quality gates. The clip is a 15x speed-run of
-          a full run.
+        <p className="mt-1 text-sm portrait:text-xl text-white/75">
+          A personal harness: a multi-agent PR-drafting pipeline. A Tauri app over
+          the Copilot CLI SDK, with architect, reviewer and test-writer agents
+          behind quality gates. Clip is a 15x speed-run.
         </p>
-        <LabVideo url="/smelt.mp4" thumb="/smelt.jpg" />
       </div>
 
       <div>
-        <h2 className="mb-2 text-lg portrait:text-3xl font-bold text-white">
+        <MediaSlot label="Columbo clip" className="aspect-video" />
+        <h2 className="mt-3 text-base portrait:text-3xl font-bold text-white">
           Columbo
         </h2>
-        <p className="mb-3 text-sm portrait:text-xl text-white/80">
+        <p className="mt-1 text-sm portrait:text-xl text-white/75">
           A chaos-board view of an agent&apos;s internals (Vite, React, Hono, raw
-          OpenAI calls), built to make a running agent&apos;s decisions legible.
+          OpenAI), built to make a running agent&apos;s decisions legible.
         </p>
-        <MediaSlot label="Columbo screenshot or short clip" className="aspect-video" />
       </div>
     </div>
   </Card>
