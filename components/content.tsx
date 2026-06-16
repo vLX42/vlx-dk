@@ -10,6 +10,12 @@ import {
 import { useWheel } from '@use-gesture/react'
 import FrontPage from './frontpage'
 import Cv from './cv'
+import {
+  JobPostingStory,
+  Lab,
+  WritingTalks,
+  IdeaToResult,
+} from './sections'
 import cv from '../types/cv'
 
 const useIsomorphicLayoutEffect =
@@ -90,6 +96,10 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
             >
               <FrontPage />
             </motion.div>
+            <JobPostingStory controls={controls} glassEffect={!lowFrameRate} />
+            <Lab controls={controls} glassEffect={!lowFrameRate} />
+            <IdeaToResult controls={controls} glassEffect={!lowFrameRate} />
+            <WritingTalks controls={controls} glassEffect={!lowFrameRate} />
             {data.map((cv) => (
               <motion.div animate={controls} key={cv.slug}>
                 <Cv cv={cv} glassEffect={!lowFrameRate} />
