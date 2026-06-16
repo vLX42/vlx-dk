@@ -56,15 +56,19 @@ const LabVideo = ({
   url: string
   thumb?: string
 }) => (
-  <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black/30">
-    <ReactPlayer
-      className="absolute top-0 left-0"
-      url={url}
-      light={thumb || false}
-      controls
-      width="100%"
-      height="100%"
-    />
+  // Cap the width so a full-bleed 16:9 video can never be taller than ~46vh and
+  // overflow its card. Multi-column videos are narrower than the cap already.
+  <div className="mx-auto w-full" style={{ maxWidth: 'calc(46vh * 16 / 9)' }}>
+    <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black/30">
+      <ReactPlayer
+        className="absolute top-0 left-0"
+        url={url}
+        light={thumb || false}
+        controls
+        width="100%"
+        height="100%"
+      />
+    </div>
   </div>
 )
 
