@@ -220,11 +220,11 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
                           }
                         : {
                             // fanned in hand behind the top card
-                            x: `${behind * 4.5}%`,
-                            y: `${behind * 1.5}%`,
+                            x: `${behind * 5}%`,
+                            y: `${behind * 1.8}%`,
                             rotate: behind * 3.5,
-                            scale: 1 - behind * 0.03,
-                            opacity: depth > 4 ? 0 : 1 - behind * 0.13,
+                            scale: 1 - behind * 0.04,
+                            opacity: depth > 4 ? 0 : 0.72 - behind * 0.13,
                           }
                     const zIndex =
                       depth === 0 ? 60 : depth < 0 ? 5 : 60 - behind
@@ -240,10 +240,12 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
                         : dist === 1
                         ? ' glass-lite'
                         : ' no-glass-fx'
+                    // Push stacked cards back: dim + soften so the top card leads.
+                    const behindClass = depth > 0 ? ' deck-behind' : ''
                     return (
                       <motion.div
                         key={sj}
-                        className={`absolute inset-0${fxClass}`}
+                        className={`absolute inset-0${fxClass}${behindClass}`}
                         initial={false}
                         animate={anim}
                         transition={{ type: 'spring', stiffness: 240, damping: 26 }}

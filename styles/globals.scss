@@ -6,27 +6,26 @@
 @layer base {
   .glass {
     /* Safari / fallback: frosted blur only. */
-    -webkit-backdrop-filter: blur(12px) saturate(185%) brightness(1.06);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
     /* Chromium: add the SVG displacement map for a liquid, refracting glass. */
-    backdrop-filter: blur(5px) saturate(185%) brightness(1.06) url(#glass-distortion);
+    backdrop-filter: blur(10px) saturate(150%) url(#glass-distortion);
   }
 
   .background {
-    /* Liquid glass: mostly clear in the centre, brighter toward the edges. */
+    /* Dark tinted liquid glass: a smoked panel so white text stays crisp and
+       the card reads with depth over the bright animated background. */
     background: linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.32) 0%,
-      rgba(255, 255, 255, 0.10) 38%,
-      rgba(255, 255, 255, 0.06) 62%,
-      rgba(255, 255, 255, 0.16) 100%
+      rgba(17, 19, 30, 0.46) 0%,
+      rgba(10, 12, 20, 0.34) 52%,
+      rgba(17, 19, 30, 0.5) 100%
     );
     box-shadow:
-      0 14px 45px 0 rgba(0, 0, 0, 0.35),
-      inset 0 1px 1px rgba(255, 255, 255, 0.8),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.22),
-      inset 0 -14px 34px rgba(255, 255, 255, 0.05);
+      0 26px 70px -10px rgba(0, 0, 0, 0.55),
+      inset 0 1px 1px rgba(255, 255, 255, 0.45),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.08);
     border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.18);
   }
 
   /* Opaque fallback used when the blur effect is off (low frame rate), so white
@@ -84,8 +83,14 @@ body {
 /* Neighbour cards: blur-only glass without the expensive SVG displacement, so
    only the single active card ever pays for the refraction. */
 .glass-lite .glass {
-  -webkit-backdrop-filter: blur(10px) saturate(175%) brightness(1.05);
-  backdrop-filter: blur(10px) saturate(175%) brightness(1.05);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  backdrop-filter: blur(12px) saturate(150%);
+}
+
+/* Stacked cards recede with a soft depth-of-field and dimming so the top card
+   is the clear focus of the deck. */
+.deck-behind {
+  filter: brightness(0.5) saturate(0.82) blur(1px);
 }
 
 $black: #141414;
