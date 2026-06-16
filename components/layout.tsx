@@ -204,26 +204,44 @@ const Layout = ({ children, lowFrameRate }: Props) => {
         {children}
         {lowFrameRate && (
           <motion.div
-            initial={{ y: '100vh' }}
+            initial={{ y: '-140%' }}
             animate={{ y: 0 }}
-            className="fixed top-0 p-1 pt-2 font-poppins inset-x-0 shadow-xl text-base bg-white w-3/4 md:w-2/5 mx-auto -mt-1  opacity-50 rounded-lg rounded-t-none text-center"
+            className="fixed top-3 left-1/2 -translate-x-1/2 z-40 font-poppins text-xs portrait:text-base text-white/75 bg-black/40 backdrop-blur px-4 py-2 rounded-full"
           >
-            Low Frame Rate detected turning off Blur Effect
+            Low frame rate detected, blur effect off
           </motion.div>
         )}
-        <div className="fixed bottom-0 right-0 font-poppins text-center text-base portrait:text-xl text-gray-400 p-2">
-          Color theme: <i>{color.name}</i>{' '}
+
+        <a
+          href="https://github.com/vLX42/vlx-dk"
+          target="_blank"
+          rel="noreferrer"
+          className="fixed bottom-3 left-3 z-40 font-poppins text-xs portrait:text-base text-white/35 hover:text-white/70 transition-colors"
+        >
+          Source code
+        </a>
+
+        <div className="fixed bottom-3 right-3 z-40 flex items-center gap-2 font-poppins text-xs portrait:text-base text-white/40">
+          <span className="hidden md:inline tracking-wide">{color.name}</span>
           <button
             onClick={() => randomColor()}
-            className="focus:outline-none outline-none"
+            aria-label="Shuffle colour theme"
+            className="flex items-center justify-center w-7 h-7 portrait:w-10 portrait:h-10 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-colors focus:outline-none"
           >
-            🔄
+            <svg
+              className="w-3.5 h-3.5 portrait:w-5 portrait:h-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="23 4 23 10 17 10" />
+              <polyline points="1 20 1 14 7 14" />
+              <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
+            </svg>
           </button>
-        </div>
-        <div className="fixed bottom-0 font-poppins left-0 text-center text-base portrait:text-xl text-gray-400 p-2">
-          <a href="https://github.com/vLX42/vlx-dk" target="_blank">
-            Source code for this page
-          </a>
         </div>
       </div>
     </>

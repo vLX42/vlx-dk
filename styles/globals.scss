@@ -127,14 +127,13 @@ $black: #141414;
     z-index: 2;
 
     & > *:not(:last-child) {
-      margin-right: 45px;
+      margin-right: 6vw;
     }
 
     .thumbnail {
-      height: 80vh;
-      width: 90vw;
-      margin: 5vw 5vw 5vh 5vh;
-      z-index: 3
+      height: 85vh;
+      width: 86vw;
+      z-index: 3;
     }
   }
 }

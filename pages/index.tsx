@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react'
-import { FPSStats, useFPSDetect } from 'fps-react'
+import { useFPSDetect } from 'fps-react'
 import Layout from "../components/layout";
 import Content from "../components/content";
 import { getAllCvs } from '../lib/api'
@@ -23,9 +23,7 @@ const Index = ({ allCvs }: Props)  => {
   const lowFrameRate = override ?? detected
   return (
     <Layout lowFrameRate={lowFrameRate}>
-      <FPSStats />
-      <Content data={allCvs} lowFrameRate={lowFrameRate}/>
-
+      <Content data={allCvs} lowFrameRate={lowFrameRate} />
     </Layout>
   );
 }

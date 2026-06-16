@@ -22,7 +22,7 @@ const FrontPage = () => {
         }}
       />
 
-      <div className="relative z-10 w-full flex flex-wrap items-center px-6 portrait:px-4">
+      <div className="relative z-10 w-full flex flex-wrap items-center px-10 lg:px-20 portrait:px-6">
         <div className="w-3/5 portrait:w-full">
           <motion.p
             initial={{ opacity: 0, y: 14 }}
@@ -150,26 +150,6 @@ const FrontPage = () => {
         </div>
       </div>
 
-      <motion.div
-        className="absolute bottom-2 right-2 text-center text-white/50"
-        animate={{ y: ['8%', '-8%'] }}
-        transition={{ duration: 0.9, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
-      >
-        <svg
-          className="w-7"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z"
-          />
-        </svg>
-      </motion.div>
     </div>
   )
 }

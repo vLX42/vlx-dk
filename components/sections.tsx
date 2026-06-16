@@ -39,8 +39,8 @@ export const Card = ({
       bare ? '' : glassEffect ? 'background glass' : 'card-solid'
     }`}
   >
-    <div className="deck-text relative z-10 h-full overflow-y-auto">
-      <div className="min-h-full flex flex-col justify-center px-8 py-8 lg:px-12 lg:py-10">
+    <div className="deck-text relative z-10 h-full overflow-hidden">
+      <div className="min-h-full flex flex-col justify-center px-10 py-9 lg:px-20 lg:py-14">
         {children}
       </div>
     </div>
