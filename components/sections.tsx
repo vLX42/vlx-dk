@@ -312,35 +312,61 @@ export const CvCard = ({
 }: {
   cv: cv
   glassEffect: boolean
-}) => (
-  <Card glassEffect={glassEffect}>
-    <div className="flex flex-wrap items-center gap-y-6">
-      <div className="w-2/6 portrait:w-full portrait:px-32 p-2">
-        {cv.coverImage && (
-          <Image
-            src={cv.coverImage}
-            className="object-cover object-center rounded"
-            width="720"
-            height="576"
-            alt=""
-          />
-        )}
-        {cv.video && (
-          <ReactPlayer
-            className="object-cover portrait:scale-75 object-center rounded"
-            width="100%"
-            controls
-            url={cv.video}
-            light={cv.videoThumb}
-          />
-        )}
+}) => {
+  const tech = (cv.technology || '')
+    .split(',')
+    .map((t) => t.trim())
+    .filter(Boolean)
+  return (
+    <Card glassEffect={glassEffect}>
+      {/* Big faded year as an editorial accent. */}
+      <span className="pointer-events-none select-none absolute top-4 right-7 portrait:right-10 text-7xl portrait:text-9xl font-bold leading-none text-white/[0.07]">
+        {cv.year}
+      </span>
+
+      <div className="relative flex portrait:flex-col items-center gap-8 lg:gap-12">
+        <div className="w-1/2 portrait:w-full">
+          {cv.coverImage && (
+            <div className="overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10">
+              <Image
+                src={cv.coverImage}
+                className="w-full h-auto object-cover object-center"
+                width="720"
+                height="576"
+                alt=""
+              />
+            </div>
+          )}
+          {cv.video && (
+            <div className="relative aspect-video overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10 bg-black/30">
+              <ReactPlayer
+                className="absolute inset-0"
+                width="100%"
+                height="100%"
+                controls
+                url={cv.video}
+                light={cv.videoThumb}
+              />
+            </div>
+          )}
+        </div>
+
+        <div className="w-1/2 portrait:w-full">
+          <StyledMarkdown>{cv.content}</StyledMarkdown>
+          {tech.length > 0 && (
+            <div className="mt-5 flex flex-wrap gap-2">
+              {tech.map((t) => (
+                <span
+                  key={t}
+                  className="text-xs portrait:text-lg px-3 py-1 rounded-full border border-white/20 bg-white/5 text-white/80"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-      <div className="w-4/6 portrait:w-full">
-        <StyledMarkdown>{cv.content}</StyledMarkdown>
-      </div>
-    </div>
-    <div className="absolute bottom-6 left-8 text-sm portrait:text-lg text-white/70">
-      Tech: <i>{cv.technology}</i>
-    </div>
-  </Card>
-)
+    </Card>
+  )
+}
