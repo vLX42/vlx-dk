@@ -15,6 +15,8 @@ import {
   useAnimation,
 } from 'framer-motion'
 import { useWheel } from '@use-gesture/react'
+import { useRouter } from 'next/router'
+import { useQueryState } from 'next-usequerystate'
 import FrontPage from './frontpage'
 import { getStoryCards, LabCard, IdeaCard, CvCard } from './sections'
 import PanelNav from './panelNav'
@@ -41,6 +43,10 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
   const [viewportW, setViewportW] = useState(0)
   const [viewportH, setViewportH] = useState(800)
   const [stopOffsets, setStopOffsets] = useState<number[]>([])
+  // Deep-linkable deck position via nuqs (?deck=story, ?deck=lab, ?deck=dfds ...)
+  const router = useRouter()
+  const [deckParam, setDeckParam] = useQueryState('deck', { history: 'replace' })
+  const didInitNav = useRef(false)
 
   // The top-level deck. Only the AI job-posting Story is a stacked sub-deck;
   // everything else (including each CV entry) is its own single-card stop.
@@ -48,18 +54,28 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
     const base = [
       {
         label: 'Intro',
+        slug: 'intro',
         cards: [
           <div key="intro" className="absolute inset-0 text-white">
             <FrontPage />
           </div>,
         ],
       },
-      { label: 'Story', cards: getStoryCards(glassEffect) },
-      { label: 'Lab', cards: [<LabCard key="lab" glassEffect={glassEffect} />] },
-      { label: 'Idea', cards: [<IdeaCard key="idea" glassEffect={glassEffect} />] },
+      { label: 'Story', slug: 'story', cards: getStoryCards(glassEffect) },
+      {
+        label: 'Lab',
+        slug: 'lab',
+        cards: [<LabCard key="lab" glassEffect={glassEffect} />],
+      },
+      {
+        label: 'Idea',
+        slug: 'idea',
+        cards: [<IdeaCard key="idea" glassEffect={glassEffect} />],
+      },
     ]
     const cvStops = data.map((c) => ({
       label: c.year || 'Work',
+      slug: c.slug,
       cards: [<CvCard key={c.slug} cv={c} glassEffect={glassEffect} />],
     }))
     return [...base, ...cvStops]
@@ -179,6 +195,27 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
   const activeStop = frames[activeFrame]?.si ?? 0
   const subActive = activeFrame - (firstFrame[activeStop] ?? 0)
   const subCount = stops[activeStop]?.cards.length ?? 1
+
+  // On first load, jump to the deck named in ?deck=... (shareable links).
+  // Wait for the router query to hydrate so deckParam is populated.
+  useEffect(() => {
+    if (didInitNav.current) return
+    if (!router.isReady) return
+    if (!stopOffsets.length) return
+    didInitNav.current = true
+    if (!deckParam) return
+    const idx = stops.findIndex((s) => s.slug === deckParam)
+    if (idx > 0) window.requestAnimationFrame(() => goToFrame(firstFrame[idx]))
+  }, [router.isReady, stopOffsets, deckParam, stops, firstFrame, goToFrame])
+
+  // Reflect the current deck in the URL as you browse. scroll:false is critical:
+  // without it every URL update would yank the window back to the top.
+  useEffect(() => {
+    if (!didInitNav.current) return
+    const slug = stops[activeStop]?.slug
+    setDeckParam(slug && slug !== 'intro' ? slug : null, { scroll: false })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeStop])
 
   return (
     <>
