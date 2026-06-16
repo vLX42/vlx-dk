@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import ReactPlayer from 'react-player'
 
 /*
  * New narrative panels for the horizontal scroll.
@@ -39,6 +40,31 @@ const Panel = ({
     <div className="px-8 py-8 lg:px-12 lg:py-12 h-full flex flex-col justify-center">
       {children}
     </div>
+  </div>
+)
+
+// Real media: a click-to-play video with a poster (light mode keeps the heavy
+// file from loading until the visitor hits play).
+const LabVideo = ({
+  url,
+  thumb,
+  className = '',
+}: {
+  url: string
+  thumb?: string
+  className?: string
+}) => (
+  <div
+    className={`relative aspect-video w-full overflow-hidden rounded-lg bg-black/30 ${className}`}
+  >
+    <ReactPlayer
+      className="absolute top-0 left-0"
+      url={url}
+      light={thumb || false}
+      controls
+      width="100%"
+      height="100%"
+    />
   </div>
 )
 
@@ -172,10 +198,7 @@ export const Lab = ({ controls, glassEffect }: SectionProps) => (
             A personal project with a 30 second promo built in Remotion, using
             real elements from the app.
           </p>
-          <MediaSlot
-            label="blind-code promo (Remotion, ~30s)"
-            className="aspect-video"
-          />
+          <LabVideo url="/blind-code-promo.mp4" thumb="/blind-code-promo.jpg" />
         </div>
 
         <div>
@@ -185,9 +208,10 @@ export const Lab = ({ controls, glassEffect }: SectionProps) => (
           <p className="mb-3 text-sm portrait:text-xl text-white/80">
             A personal playground: a multi-agent PR-drafting pipeline. A Tauri
             desktop app wrapping the Copilot CLI SDK, with architect, reviewer
-            and test-writer agents behind quality gates.
+            and test-writer agents behind quality gates. The clip is a 15x
+            speed-run of a full run.
           </p>
-          <MediaSlot label="Smelt screenshot or flow diagram" className="aspect-video" />
+          <LabVideo url="/smelt.mp4" thumb="/smelt.jpg" />
         </div>
 
         <div>
