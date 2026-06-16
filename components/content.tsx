@@ -16,6 +16,7 @@ import {
   WritingTalks,
   IdeaToResult,
 } from './sections'
+import PanelNav from './panelNav'
 import cv from '../types/cv'
 
 const useIsomorphicLayoutEffect =
@@ -72,6 +73,19 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
     }
   },[])
 
+  const navLabels = [
+    'Home',
+    'Story',
+    'Stills',
+    'Motion',
+    'Productions',
+    'The point',
+    'Lab',
+    'Idea to result',
+    'Writing & talks',
+    ...data.map((c) => c.year || 'Experience'),
+  ]
+
   const controls = useAnimation()
   const wheel = useWheel((event) => {
      controls.start({
@@ -109,6 +123,12 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
         </motion.section>
       </div>
       <div ref={ghostRef} style={{ height: scrollRange }} className="ghost" />
+      <PanelNav
+        scrollRef={scrollRef}
+        scrollRange={scrollRange}
+        viewportW={viewportW}
+        labels={navLabels}
+      />
     </>
   )
 }
