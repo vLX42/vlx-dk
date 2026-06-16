@@ -5,8 +5,10 @@
 
 @layer base {
   .glass {
-    backdrop-filter: blur(18px) saturate(180%);
-    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    /* Safari / fallback: frosted blur only. */
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    /* Chromium: add the SVG displacement map for a refracting, deforming glass. */
+    backdrop-filter: blur(8px) saturate(180%) url(#glass-distortion);
   }
 
   .background {

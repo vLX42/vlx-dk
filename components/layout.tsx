@@ -119,6 +119,42 @@ const Layout = ({ children, lowFrameRate }: Props) => {
 
   return (
     <>
+      {/* Refraction filter for the frosted-glass cards (see .glass in globals.scss).
+          feTurbulence + feDisplacementMap warp the backdrop so it reads like real
+          glass. Browsers without url() backdrop-filter support fall back to blur. */}
+      <svg
+        aria-hidden="true"
+        width="0"
+        height="0"
+        style={{ position: 'absolute', overflow: 'hidden' }}
+      >
+        <defs>
+          <filter
+            id="glass-distortion"
+            x="-20%"
+            y="-20%"
+            width="140%"
+            height="140%"
+            filterUnits="objectBoundingBox"
+          >
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.008 0.012"
+              numOctaves="2"
+              seed="17"
+              result="noise"
+            />
+            <feGaussianBlur in="noise" stdDeviation="3" result="softNoise" />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="softNoise"
+              scale="30"
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
+          </filter>
+        </defs>
+      </svg>
       <AnimatedBackground
         color1={color.color1}
         color2={color.color2}
