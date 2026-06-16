@@ -91,7 +91,7 @@ const jobPostingPhases = [
   {
     eyebrow: 'Phase 1 · Stills',
     heading: 'AI-generated images',
-    copy: 'Job ads built from AI stills that played on familiar pop culture. Quick to make, hard to scroll past.',
+    copy: 'Job ads built from AI stills riffing on Pixar and Disney, made with whatever image model was best at the time (nano banana). A few tries, an afternoon each.',
     slots: [
       'Job ad still #1 (full image)',
       'Job ad still #2 (full image)',
@@ -103,7 +103,7 @@ const jobPostingPhases = [
   {
     eyebrow: 'Phase 2 · Motion',
     heading: 'Short AI videos',
-    copy: 'As the tools matured, the stills turned into short AI-generated videos. Same ideas, now moving.',
+    copy: 'The stills started moving. Short AI videos, an afternoon of work, riding each new best model as it landed (Sora, then Veo 3).',
     slots: ['Short recruitment video (~15s)'],
     grid: 'grid grid-cols-1 gap-4',
     slotClass: 'aspect-video',
@@ -111,7 +111,7 @@ const jobPostingPhases = [
   {
     eyebrow: 'Phase 3 · Productions',
     heading: 'Multi-scene mini campaigns',
-    copy: 'Full productions: storyboarded scenes, music, product highlights. Small campaigns, made solo.',
+    copy: 'Full mini campaigns: multi-scene video from Seedance 2.0 with music from ElevenLabs. Still one afternoon, still solo.',
     slots: ['Multi-scene campaign video'],
     grid: 'grid grid-cols-1 gap-4',
     slotClass: 'aspect-video',
@@ -126,9 +126,11 @@ export const JobPostingStory = ({ controls, glassEffect }: SectionProps) => (
         <p className={eyebrow}>The story</p>
         <h1 className={title}>Evolution of my job postings</h1>
         <p className={body}>
-          As the hiring manager I made every campaign below myself, with AI.
-          Scroll right to watch them grow from a single generated image into
-          full multi-scene productions.
+          As the hiring manager, I made every campaign below myself with AI. I
+          was building out a frontend team (a few mid-levels, a senior, two
+          leads), and the ads got noticed: candidates brought them up in
+          interviews. Scroll right to watch them grow from a single generated
+          image into full multi-scene productions.
         </p>
         <p className="text-sm portrait:text-xl text-white/70">
           Stills, then short videos, then mini campaigns.
@@ -195,8 +197,9 @@ export const Lab = ({ controls, glassEffect }: SectionProps) => (
             </a>
           </h2>
           <p className="mb-3 text-sm portrait:text-xl text-white/80">
-            A personal project with a 30 second promo built in Remotion, using
-            real elements from the app.
+            A game for coders and web developers, a fun thing to do at an event.
+            React and Convex, hosted on Vercel. The 30 second promo below is
+            built in Remotion from real elements of the app.
           </p>
           <LabVideo url="/blind-code-promo.mp4" thumb="/blind-code-promo.jpg" />
         </div>
@@ -234,12 +237,13 @@ export const Lab = ({ controls, glassEffect }: SectionProps) => (
 /* A5. Idea to result (timeboxes)                                      */
 /* ------------------------------------------------------------------ */
 
-// Only the blind-code timebox is confirmed. Get real numbers from Peter for the
-// rest before publishing. Do not invent them.
 const ideaCards = [
   { time: '~30 min', what: 'blind-code promo video', stack: 'Remotion, AI-assisted' },
-  { time: 'TODO', what: 'Recruitment campaign', stack: 'AI video tools' },
-  { time: 'TODO', what: 'Prototype to demo', stack: 'Agentic workflow' },
+  {
+    time: 'An afternoon',
+    what: 'AI recruitment campaign',
+    stack: 'Seedance 2.0 + ElevenLabs',
+  },
 ]
 
 export const IdeaToResult = ({ controls, glassEffect }: SectionProps) => (
@@ -251,7 +255,7 @@ export const IdeaToResult = ({ controls, glassEffect }: SectionProps) => (
         Concept to shipped artifact, timeboxed. The point is not the tool. It is
         how fast a good idea becomes real.
       </p>
-      <div className="grid grid-cols-3 portrait:grid-cols-1 gap-6">
+      <div className="grid grid-cols-2 portrait:grid-cols-1 gap-6">
         {ideaCards.map((card, i) => (
           <div
             key={i}
@@ -269,39 +273,6 @@ export const IdeaToResult = ({ controls, glassEffect }: SectionProps) => (
           </div>
         ))}
       </div>
-    </Panel>
-  </motion.div>
-)
-
-/* ------------------------------------------------------------------ */
-/* A3. Writing                                                         */
-/* ------------------------------------------------------------------ */
-
-// TODO: replace href="#" with Peter's actual post URLs.
-const writingLinks = [
-  { label: 'LinkedIn post (TODO: add link)', href: '#' },
-  { label: 'LinkedIn post (TODO: add link)', href: '#' },
-  { label: 'LinkedIn post (TODO: add link)', href: '#' },
-]
-
-export const WritingTalks = ({ controls, glassEffect }: SectionProps) => (
-  <motion.div animate={controls}>
-    <Panel glassEffect={glassEffect}>
-      <p className={eyebrow}>Writing</p>
-      <h1 className={title}>How I think, not just what I use</h1>
-      <p className={body}>
-        A few posts on building with AI, leading a frontend chapter, and
-        shipping fast.
-      </p>
-      <ul className="space-y-4">
-        {writingLinks.map((item, i) => (
-          <li key={i} className="text-base portrait:text-2xl">
-            <a className={link} href={item.href} target="_blank" rel="noreferrer">
-              {item.label}
-            </a>
-          </li>
-        ))}
-      </ul>
     </Panel>
   </motion.div>
 )

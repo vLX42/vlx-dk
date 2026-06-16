@@ -10,12 +10,7 @@ import {
 import { useWheel } from '@use-gesture/react'
 import FrontPage from './frontpage'
 import Cv from './cv'
-import {
-  JobPostingStory,
-  Lab,
-  WritingTalks,
-  IdeaToResult,
-} from './sections'
+import { JobPostingStory, Lab, IdeaToResult } from './sections'
 import PanelNav from './panelNav'
 import cv from '../types/cv'
 
@@ -82,7 +77,6 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
     'The point',
     'Lab',
     'Idea to result',
-    'Writing',
     ...data.map((c) => c.year || 'Experience'),
   ]
 
@@ -113,7 +107,6 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
             <JobPostingStory controls={controls} glassEffect={!lowFrameRate} />
             <Lab controls={controls} glassEffect={!lowFrameRate} />
             <IdeaToResult controls={controls} glassEffect={!lowFrameRate} />
-            <WritingTalks controls={controls} glassEffect={!lowFrameRate} />
             {data.map((cv) => (
               <motion.div animate={controls} key={cv.slug}>
                 <Cv cv={cv} glassEffect={!lowFrameRate} />
