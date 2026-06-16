@@ -5,24 +5,27 @@
 
 @layer base {
   .glass {
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
   }
 
   .background {
     /* @apply backdrop-filter-blur; */
-    background: rgb(255, 255, 255,0.25);
+    background: rgb(255, 255, 255,0.18);
     background: linear-gradient(
       128deg,
-      rgba(255, 255, 255, 0.25) 0%,
-      rgba(112, 112, 112, 0.25) 73%,
-      rgba(159, 159, 159, 0.4) 81%,
-      rgba(163, 163, 163, 0.5) 89%,
-      rgba(54, 54, 54, 0.4) 100%
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(255, 255, 255, 0.12) 45%,
+      rgba(150, 150, 150, 0.16) 78%,
+      rgba(120, 120, 120, 0.22) 89%,
+      rgba(54, 54, 54, 0.28) 100%
     );
-    box-shadow: 0 8px 32px 0 rgba(31, 31, 31, 0.37);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow:
+      0 8px 32px 0 rgba(31, 31, 31, 0.37),
+      inset 0 1px 1px rgba(255, 255, 255, 0.6),
+      inset 0 -1px 1px rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
   }
 }
 
