@@ -24,7 +24,7 @@ const FrontPage = () => {
         <div className="w-2/3 portrait:w-full pb-24 portrait:pb-1">
           <h1 className="text-5xl portrait:text-9xl ">Who am I?</h1>
           <h2 className="text-3xl portrait:text-6xl pt-2 pb-6">
-            Peter Biro — Frontend Chapter Lead &amp; Full-Stack Developer
+            Peter Biro: Frontend Chapter Lead and Senior Full Stack Developer
           </h2>
           <p className="uppercase tracking-loose">
             I have been working professionally in Web Development since 1998
@@ -77,15 +77,15 @@ const FrontPage = () => {
             >
               Node.js
             </a>
-            , GitHub Actions, Serverless and microservices — increasingly with an
-            AI-assisted, agentic workflow that takes an idea from concept to a
-            shipped result in a fraction of the usual time.
+            , GitHub Actions, Serverless and microservices. Most of it now runs
+            through an AI-assisted, agentic workflow that takes an idea from
+            concept to a shipped result in a fraction of the usual time.
           </p>
 
           <p>
             Besides my regular work, I run the Frontend Community at DFDS. We
-            gather every three weeks to share experiences and explore where
-            tooling — and AI — is taking our craft next.
+            gather every three weeks to share experiences and explore where AI
+            is taking our craft next.
           </p>
           <p>
             <br />

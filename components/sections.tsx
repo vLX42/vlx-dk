@@ -4,10 +4,10 @@ import { motion } from 'framer-motion'
 /*
  * New narrative panels for the horizontal scroll.
  * Each section returns one or more <motion.div animate={controls}> panels so they
- * sit as direct children of `.thumbnails` and inherit the existing 45px spacing,
+ * sit as direct children of `.thumbnails` and inherit the existing spacing,
  * wheel-tilt and glass styling.
  *
- * Media is scaffolded with <MediaSlot> placeholders — Peter drops real assets in
+ * Media is scaffolded with <MediaSlot> placeholders. Peter drops real assets in
  * later (see TODO labels). Swap a slot for next/image or react-player when ready.
  */
 
@@ -53,19 +53,19 @@ const MediaSlot = ({
   <div
     className={`rounded-lg border-2 border-dashed border-white/50 bg-white/10 flex items-center justify-center text-center text-sm portrait:text-xl text-white/80 p-6 ${className}`}
   >
-    <span>🎬 TODO — {label}</span>
+    <span>TODO media: {label}</span>
   </div>
 )
 
 /* ------------------------------------------------------------------ */
-/* A1 — Evolution of my job postings (centerpiece)                     */
+/* A1. Evolution of my job postings (centerpiece)                      */
 /* ------------------------------------------------------------------ */
 
 const jobPostingPhases = [
   {
     eyebrow: 'Phase 1 · Stills',
     heading: 'AI-generated images',
-    copy: 'Eye-catching job ads built from AI stills that riffed on familiar pop culture. Fast to make, impossible to scroll past.',
+    copy: 'Job ads built from AI stills that played on familiar pop culture. Quick to make, hard to scroll past.',
     slots: [
       'Job ad still #1 (full image)',
       'Job ad still #2 (full image)',
@@ -77,7 +77,7 @@ const jobPostingPhases = [
   {
     eyebrow: 'Phase 2 · Motion',
     heading: 'Short AI videos',
-    copy: 'As the tools matured, the stills became short AI-generated videos — the same ideas, now moving.',
+    copy: 'As the tools matured, the stills turned into short AI-generated videos. Same ideas, now moving.',
     slots: ['Short recruitment video (~15s)'],
     grid: 'grid grid-cols-1 gap-4',
     slotClass: 'aspect-video',
@@ -85,7 +85,7 @@ const jobPostingPhases = [
   {
     eyebrow: 'Phase 3 · Productions',
     heading: 'Multi-scene mini campaigns',
-    copy: 'Full productions: storyboarded scenes, music and product highlights. Effectively small campaigns, made solo.',
+    copy: 'Full productions: storyboarded scenes, music, product highlights. Small campaigns, made solo.',
     slots: ['Multi-scene campaign video'],
     grid: 'grid grid-cols-1 gap-4',
     slotClass: 'aspect-video',
@@ -100,12 +100,12 @@ export const JobPostingStory = ({ controls, glassEffect }: SectionProps) => (
         <p className={eyebrow}>The story</p>
         <h1 className={title}>Evolution of my job postings</h1>
         <p className={body}>
-          As the hiring manager, I made every recruitment campaign below myself
-          — with AI. Scroll right to watch them evolve from a single generated
-          image into full multi-scene productions.
+          As the hiring manager I made every campaign below myself, with AI.
+          Scroll right to watch them grow from a single generated image into
+          full multi-scene productions.
         </p>
         <p className="text-sm portrait:text-xl text-white/70">
-          → Stills · Short videos · Mini campaigns
+          Stills, then short videos, then mini campaigns.
         </p>
       </Panel>
     </motion.div>
@@ -126,14 +126,14 @@ export const JobPostingStory = ({ controls, glassEffect }: SectionProps) => (
       </motion.div>
     ))}
 
-    {/* Closing — the point */}
+    {/* Closing, the point */}
     <motion.div animate={controls}>
       <Panel glassEffect={glassEffect}>
         <p className={eyebrow}>The point</p>
         <h1 className={title}>The bottleneck has moved to taste and direction.</h1>
         <p className={body}>
           As the tools matured, the ambition scaled with them. The hard part is
-          no longer production — it's knowing what to make, and telling a story
+          no longer production. It is knowing what to make, and telling a story
           worth watching.
         </p>
       </Panel>
@@ -142,7 +142,7 @@ export const JobPostingStory = ({ controls, glassEffect }: SectionProps) => (
 )
 
 /* ------------------------------------------------------------------ */
-/* A2 — What I'm building now / Lab                                    */
+/* A2. What I'm building now (the Lab)                                 */
 /* ------------------------------------------------------------------ */
 
 export const Lab = ({ controls, glassEffect }: SectionProps) => (
@@ -151,56 +151,65 @@ export const Lab = ({ controls, glassEffect }: SectionProps) => (
       <p className={eyebrow}>The Lab</p>
       <h1 className={title}>What I&apos;m building now</h1>
       <p className={body}>
-        The AI-assisted and agentic work — built fast, mostly solo.
+        Agentic and AI-assisted projects, built fast and mostly solo. The
+        recruitment campaigns above are part of the same habit.
       </p>
 
       <div className="grid grid-cols-2 portrait:grid-cols-1 gap-6">
         <div>
           <h2 className="mb-2 text-lg portrait:text-3xl font-bold text-white">
             blind-code{' '}
-            {/* TODO: real blind-code URL */}
-            <a className={link} href="#" target="_blank" rel="noreferrer">
-              ↗
+            <a
+              className={link}
+              href="https://blind-code.vlx.dk"
+              target="_blank"
+              rel="noreferrer"
+            >
+              blind-code.vlx.dk
             </a>
           </h2>
           <p className="mb-3 text-sm portrait:text-xl text-white/80">
-            30-second promo built with Remotion, AI-assisted.
+            A personal project with a 30 second promo built in Remotion, using
+            real elements from the app.
           </p>
-          <MediaSlot label="blind-code promo (Remotion, ~30s)" className="aspect-video" />
+          <MediaSlot
+            label="blind-code promo (Remotion, ~30s)"
+            className="aspect-video"
+          />
         </div>
 
         <div>
           <h2 className="mb-2 text-lg portrait:text-3xl font-bold text-white">
-            AI recruitment videos
+            Smelt
           </h2>
           <p className="mb-3 text-sm portrait:text-xl text-white/80">
-            The campaigns from the story panel — see “Evolution of my job
-            postings”.
+            A personal playground: a multi-agent PR-drafting pipeline. A Tauri
+            desktop app wrapping the Copilot CLI SDK, with architect, reviewer
+            and test-writer agents behind quality gates.
           </p>
-          <MediaSlot label="Best campaign reel (or reuse A1 assets)" className="aspect-video" />
+          <MediaSlot label="Smelt screenshot or flow diagram" className="aspect-video" />
         </div>
 
         <div>
           <h2 className="mb-2 text-lg portrait:text-3xl font-bold text-white">
-            “Your Agent Is a while Loop in a Trench Coat”
+            Columbo
           </h2>
           <p className="mb-3 text-sm portrait:text-xl text-white/80">
-            A talk on how agentic coding actually works under the hood.
+            A chaos-board view of an agent&apos;s internals (Vite, React, Hono,
+            raw OpenAI calls). Built as the live demo for the talk below.
+          </p>
+          <MediaSlot label="Columbo screenshot or short clip" className="aspect-video" />
+        </div>
+
+        <div>
+          <h2 className="mb-2 text-lg portrait:text-3xl font-bold text-white">
+            &ldquo;Your Agent Is a while Loop in a Trench Coat&rdquo;
+          </h2>
+          <p className="mb-3 text-sm portrait:text-xl text-white/80">
+            A talk on how agentic coding actually works once you look under the
+            hood.
           </p>
           <MediaSlot label="Talk slides or recording link" className="aspect-video" />
-        </div>
-
-        {/* TODO: Columbo — include only if Peter wants it public.
-            Keep any DFDS-internal tooling (e.g. Smelt) generic or off. */}
-        <div>
-          <h2 className="mb-2 text-lg portrait:text-3xl font-bold text-white">
-            More agentic experiments
-          </h2>
-          <p className="mb-3 text-sm portrait:text-xl text-white/80">
-            {/* TODO: confirm with Peter whether to feature Columbo publicly */}
-            Internal tooling and side projects — described generically.
-          </p>
-          <MediaSlot label="Optional: Columbo / other experiment" className="aspect-video" />
         </div>
       </div>
     </Panel>
@@ -208,18 +217,58 @@ export const Lab = ({ controls, glassEffect }: SectionProps) => (
 )
 
 /* ------------------------------------------------------------------ */
-/* A3 — Writing & talks                                                */
+/* A5. Idea to result (timeboxes)                                      */
 /* ------------------------------------------------------------------ */
 
-// TODO: replace href="#" with Peter's actual post / talk URLs
+// Only the blind-code timebox is confirmed. Get real numbers from Peter for the
+// rest before publishing. Do not invent them.
+const ideaCards = [
+  { time: '~30 min', what: 'blind-code promo video', stack: 'Remotion, AI-assisted' },
+  { time: 'TODO', what: 'Recruitment campaign', stack: 'AI video tools' },
+  { time: 'TODO', what: 'Prototype to demo', stack: 'Agentic workflow' },
+]
+
+export const IdeaToResult = ({ controls, glassEffect }: SectionProps) => (
+  <motion.div animate={controls}>
+    <Panel glassEffect={glassEffect}>
+      <p className={eyebrow}>Idea to result</p>
+      <h1 className={title}>Speed is the signature</h1>
+      <p className={body}>
+        Concept to shipped artifact, timeboxed. The point is not the tool. It is
+        how fast a good idea becomes real.
+      </p>
+      <div className="grid grid-cols-3 portrait:grid-cols-1 gap-6">
+        {ideaCards.map((card, i) => (
+          <div
+            key={i}
+            className="rounded-lg bg-white/10 border border-white/20 p-5 flex flex-col"
+          >
+            <span className="text-3xl portrait:text-5xl font-bold text-white">
+              {card.time}
+            </span>
+            <span className="mt-2 text-base portrait:text-2xl text-white/90">
+              {card.what}
+            </span>
+            <span className="mt-1 text-sm portrait:text-xl text-white/70">
+              {card.stack}
+            </span>
+          </div>
+        ))}
+      </div>
+    </Panel>
+  </motion.div>
+)
+
+/* ------------------------------------------------------------------ */
+/* A3. Writing & talks                                                 */
+/* ------------------------------------------------------------------ */
+
+// TODO: replace href="#" with Peter's actual post / talk URLs.
 const writingLinks = [
-  { label: 'LinkedIn post — TODO: add link', href: '#' },
-  { label: 'LinkedIn post — TODO: add link', href: '#' },
-  { label: 'LinkedIn post — TODO: add link', href: '#' },
-  {
-    label: '“Your Agent Is a while Loop in a Trench Coat” — talk',
-    href: '#',
-  },
+  { label: 'LinkedIn post (TODO: add link)', href: '#' },
+  { label: 'LinkedIn post (TODO: add link)', href: '#' },
+  { label: 'LinkedIn post (TODO: add link)', href: '#' },
+  { label: '"Your Agent Is a while Loop in a Trench Coat" (talk)', href: '#' },
 ]
 
 export const WritingTalks = ({ controls, glassEffect }: SectionProps) => (
@@ -240,49 +289,6 @@ export const WritingTalks = ({ controls, glassEffect }: SectionProps) => (
           </li>
         ))}
       </ul>
-    </Panel>
-  </motion.div>
-)
-
-/* ------------------------------------------------------------------ */
-/* A5 — Idea to result (timeboxes)                                     */
-/* ------------------------------------------------------------------ */
-
-// Only the blind-code timebox is confirmed (from the handover).
-// TODO: get real numbers from Peter for the rest — do not invent.
-const ideaCards = [
-  { time: '~30 min', what: 'blind-code promo video', stack: 'Remotion + Claude' },
-  { time: 'TODO', what: 'Recruitment campaign', stack: 'AI video tools' },
-  { time: 'TODO', what: 'Prototype → demo', stack: 'Agentic workflow' },
-]
-
-export const IdeaToResult = ({ controls, glassEffect }: SectionProps) => (
-  <motion.div animate={controls}>
-    <Panel glassEffect={glassEffect}>
-      <p className={eyebrow}>Idea → result</p>
-      <h1 className={title}>Speed is the signature</h1>
-      <p className={body}>
-        Concept to shipped artifact, timeboxed. The point isn&apos;t the tool —
-        it&apos;s how fast a good idea becomes real.
-      </p>
-      <div className="grid grid-cols-3 portrait:grid-cols-1 gap-6">
-        {ideaCards.map((card, i) => (
-          <div
-            key={i}
-            className="rounded-lg bg-white/10 border border-white/20 p-5 flex flex-col"
-          >
-            <span className="text-3xl portrait:text-5xl font-bold text-white">
-              {card.time}
-            </span>
-            <span className="mt-2 text-base portrait:text-2xl text-white/90">
-              {card.what}
-            </span>
-            <span className="mt-1 text-sm portrait:text-xl text-white/70">
-              {card.stack}
-            </span>
-          </div>
-        ))}
-      </div>
     </Panel>
   </motion.div>
 )
