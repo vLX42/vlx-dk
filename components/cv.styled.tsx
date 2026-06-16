@@ -10,19 +10,20 @@ const StyledMarkdown = ({ children }: StyledMarkdownProps) => (
         h1: {
           props: {
             className:
-              'mb-8 portrait:mb-4 text-2xl portrait:text-6xl  font-bold tracking-tighter text-white lg:text-left',
+              'mb-3 portrait:mb-4 text-3xl portrait:text-6xl font-bold tracking-tight text-white lg:text-left',
           },
         },
         h2: {
           props: {
-            className: 'mb-2 text-xs portrait:text-xl font-medium tracking-widest text-white',
+            className:
+              'mb-3 text-[0.7rem] portrait:text-xl font-semibold tracking-[0.2em] uppercase text-white/60',
           },
         },
 
         p: {
           props: {
             className:
-              'mb-8 portrait:mb-4 text-base portrait:text-3xl leading-relaxed text-white lg:text-left',
+              'mb-4 portrait:mb-4 text-base portrait:text-3xl leading-relaxed text-white/85 lg:text-left',
           },
         },
         a: {

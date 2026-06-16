@@ -154,7 +154,7 @@ const PhaseMediaGrid = ({ phase }: { phase: Phase }) => (
           src={m.src}
           alt={m.alt || ''}
           loading="lazy"
-          className="w-full h-auto rounded-lg"
+          className="max-h-[44vh] max-w-full w-auto mx-auto rounded-lg shadow-lg"
         />
       )
     )}
