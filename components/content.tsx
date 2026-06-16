@@ -82,7 +82,7 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
     'The point',
     'Lab',
     'Idea to result',
-    'Writing & talks',
+    'Writing',
     ...data.map((c) => c.year || 'Experience'),
   ]
 

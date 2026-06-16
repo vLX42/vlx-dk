@@ -220,20 +220,10 @@ export const Lab = ({ controls, glassEffect }: SectionProps) => (
           </h2>
           <p className="mb-3 text-sm portrait:text-xl text-white/80">
             A chaos-board view of an agent&apos;s internals (Vite, React, Hono,
-            raw OpenAI calls). Built as the live demo for the talk below.
+            raw OpenAI calls), built to make a running agent&apos;s decisions
+            legible.
           </p>
           <MediaSlot label="Columbo screenshot or short clip" className="aspect-video" />
-        </div>
-
-        <div>
-          <h2 className="mb-2 text-lg portrait:text-3xl font-bold text-white">
-            &ldquo;Your Agent Is a while Loop in a Trench Coat&rdquo;
-          </h2>
-          <p className="mb-3 text-sm portrait:text-xl text-white/80">
-            A talk on how agentic coding actually works once you look under the
-            hood.
-          </p>
-          <MediaSlot label="Talk slides or recording link" className="aspect-video" />
         </div>
       </div>
     </Panel>
@@ -284,25 +274,24 @@ export const IdeaToResult = ({ controls, glassEffect }: SectionProps) => (
 )
 
 /* ------------------------------------------------------------------ */
-/* A3. Writing & talks                                                 */
+/* A3. Writing                                                         */
 /* ------------------------------------------------------------------ */
 
-// TODO: replace href="#" with Peter's actual post / talk URLs.
+// TODO: replace href="#" with Peter's actual post URLs.
 const writingLinks = [
   { label: 'LinkedIn post (TODO: add link)', href: '#' },
   { label: 'LinkedIn post (TODO: add link)', href: '#' },
   { label: 'LinkedIn post (TODO: add link)', href: '#' },
-  { label: '"Your Agent Is a while Loop in a Trench Coat" (talk)', href: '#' },
 ]
 
 export const WritingTalks = ({ controls, glassEffect }: SectionProps) => (
   <motion.div animate={controls}>
     <Panel glassEffect={glassEffect}>
-      <p className={eyebrow}>Writing &amp; talks</p>
+      <p className={eyebrow}>Writing</p>
       <h1 className={title}>How I think, not just what I use</h1>
       <p className={body}>
-        A few posts and a talk on building with AI, leading a frontend chapter,
-        and shipping fast.
+        A few posts on building with AI, leading a frontend chapter, and
+        shipping fast.
       </p>
       <ul className="space-y-4">
         {writingLinks.map((item, i) => (
