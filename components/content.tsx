@@ -182,7 +182,7 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
 
   return (
     <>
-      <div className="scroll-container pl-5 font-poppins font-thin" {...wheel()}>
+      <div className="scroll-container pl-5 font-poppins font-light" {...wheel()}>
         <motion.section
           ref={scrollRef}
           style={{ x: spring }}

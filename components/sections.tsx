@@ -11,12 +11,13 @@ import cv from '../types/cv'
  */
 
 const eyebrow =
-  'mb-2 text-xs portrait:text-xl font-medium tracking-widest text-white/80 uppercase'
+  'mb-3 text-[0.7rem] portrait:text-xl font-semibold tracking-[0.25em] text-white/60 uppercase'
 const title =
-  'mb-6 portrait:mb-4 text-2xl portrait:text-6xl font-bold tracking-tighter text-white'
+  'mb-5 portrait:mb-4 text-4xl portrait:text-6xl font-bold tracking-tight leading-[1.05] text-white'
 const body =
-  'mb-6 text-base portrait:text-2xl leading-relaxed text-white/90 lg:text-left'
-const link = 'text-white underline hover:text-gray-200'
+  'mb-6 text-lg portrait:text-2xl leading-relaxed text-white/85 lg:text-left max-w-2xl'
+const link =
+  'text-white underline decoration-white/40 underline-offset-4 hover:decoration-white'
 
 // A single stacked card. Fills its deck-stop. `bare` skips the glass styling
 // (used for the intro card, which sits transparent over the animated bg).

@@ -1,160 +1,161 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import ReactTooltip from 'react-tooltip'
+
+const stack = [
+  'React',
+  'Next.js',
+  'TypeScript',
+  'Node.js',
+  '.NET',
+  'AI / agentic tooling',
+]
 
 const FrontPage = () => {
-  const bounceTransition = {
-    y: {
-      duration: 0.4,
-      yrepeat: Infinity,
-      repeatType: 'reverse',
-      ease: 'easeOut',
-    },
-    backgroundColor: {
-      duration: 0,
-      repeat: Infinity,
-      repeatType: 'reverse',
-      ease: 'easeOut',
-      repeatDelay: 0.8,
-    },
-  }
   return (
-    <>
-      <div className="mx-auto flex flex-wrap items-center text-base portrait:text-5xl">
-        <div className="w-2/3 portrait:w-full pb-24 portrait:pb-1">
-          <h1 className="text-5xl portrait:text-9xl ">Who am I?</h1>
-          <h2 className="text-3xl portrait:text-6xl pt-2 pb-6">
-            Peter Biro: Frontend Chapter Lead and Senior Full Stack Developer
-          </h2>
-          <p className="uppercase tracking-loose">
-            I have been working professionally in Web Development since 1998
-          </p>
-          <h1 className="my-4">
-            Since October 2023 I’ve been Frontend Chapter Lead at{' '}
-            <a
-              href="https://www.dfds.com"
-              target="_blank"
-              className="underline"
-            >
-              DFDS
-            </a>
-            , setting frontend direction across teams while staying hands-on.
-          </h1>
-          <p className="leading-normal mb-4">
-            I build across the stack with React.js,{' '}
-            <a
-              href="https://nextjs.org/"
-              className="underline"
-              data-tip
-              data-for="next"
-            >
-              Next.js
-            </a>
-            ,{' '}
-            <a
-              href="https://nestjs.com/"
-              className="underline"
-              data-tip
-              data-for="nest"
-            >
-              Nest.js
-            </a>
-            ,{' '}
-            <a
-              href="https://redux.js.org/"
-              data-tip
-              data-for="redux"
-              className="underline"
-            >
-              Redux
-            </a>
-            , TypeScript, .NET Core, C#,{' '}
-            <a
-              href="https://nodejs.org/"
-              data-tip
-              data-for="node"
-              className="underline"
-            >
-              Node.js
-            </a>
-            , GitHub Actions, Serverless and microservices. Most of it now runs
-            through an AI-assisted, agentic workflow that takes an idea from
-            concept to a shipped result in a fraction of the usual time.
-          </p>
+    <div className="relative h-full w-full flex items-center deck-text">
+      {/* Soft dark scrim so the hero copy stays crisp over the bright background. */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(115% 85% at 22% 45%, rgba(8,10,18,0.62) 0%, rgba(8,10,18,0.30) 46%, rgba(8,10,18,0) 76%)',
+        }}
+      />
 
-          <p>
-            Besides my regular work, I run the Frontend Community at DFDS. We
-            gather every three weeks to share experiences and explore where AI
-            is taking our craft next.
-          </p>
-          <p>
-            <br />
-            <span>Scroll for more or follow me on these platforms:</span>
-            <br />
-            <a href="https://github.com/vLX42/" target="_blank" className="p-1">
+      <div className="relative z-10 w-full flex flex-wrap items-center px-6 portrait:px-4">
+        <div className="w-3/5 portrait:w-full">
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-4 text-xs portrait:text-xl font-semibold tracking-[0.28em] uppercase text-white/60"
+          >
+            Frontend Chapter Lead · Senior Full Stack · Since 1998
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.05 }}
+            className="text-6xl portrait:text-8xl font-bold tracking-tight leading-[0.95]"
+          >
+            Peter Biro
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.12 }}
+            className="mt-4 text-2xl portrait:text-4xl font-light text-white/90 leading-snug max-w-2xl"
+          >
+            I build products end to end, and lead the people who build them.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.25 }}
+            className="mt-6 space-y-3 text-base portrait:text-2xl text-white/80 leading-relaxed max-w-2xl"
+          >
+            <p>
+              More than two decades in: I co-founded a software company and shipped
+              a CMS that still runs 1,500+ sites, then led the rewrite of DFDS{'’'}s
+              B2B freight platform onto a modern microservice stack. Today I run
+              the Frontend Chapter at DFDS, setting direction across teams while
+              staying in the code.
+            </p>
+            <p>
+              What is different now is how I build. Most of my work runs through an
+              AI-assisted, agentic workflow that takes an idea to a shipped result
+              in a fraction of the usual time. I write the agents, not just the
+              code.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-6 flex flex-wrap gap-2"
+          >
+            {stack.map((t) => (
+              <span
+                key={t}
+                className="text-xs portrait:text-lg px-3 py-1 rounded-full border border-white/20 bg-white/5 text-white/80"
+              >
+                {t}
+              </span>
+            ))}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="mt-7 flex items-center gap-4 text-sm portrait:text-xl text-white/70"
+          >
+            <span>Scroll to see the work</span>
+            <a
+              href="https://github.com/vLX42/"
+              target="_blank"
+              rel="noreferrer"
+              className="p-1"
+            >
               <Image
                 src="/github.svg"
-                className="shadow align-middle border-none inverted shadow"
+                className="inverted align-middle"
                 alt="GitHub"
-                width={35}
-                height={35}
+                width={30}
+                height={30}
               />
             </a>
-
             <a
               href="https://www.linkedin.com/in/vlx42/"
               target="_blank"
+              rel="noreferrer"
               className="p-1"
             >
               <Image
                 src="/linkedin.svg"
-                className="shadow align-middle border-none inverted shadow"
-                alt="Linkedin"
-                width={35}
-                height={35}
+                className="inverted align-middle"
+                alt="LinkedIn"
+                width={30}
+                height={30}
               />
             </a>
-          </p>
+          </motion.div>
         </div>
 
-        <ReactTooltip id="nest">
-          <Image src="/nest.svg" width="50" height="50"></Image>
-        </ReactTooltip>
-        <ReactTooltip id="next">
-          <Image src="/next.svg" width="50" height="50"></Image>
-        </ReactTooltip>
-        <ReactTooltip id="redux">
-          <Image src="/redux.svg" width="50" height="50"></Image>
-        </ReactTooltip>
-        <ReactTooltip id="node">
-          <Image src="/node.svg" width="50" height="50"></Image>
-        </ReactTooltip>
-
-        <div className="w-1/3 portrait:w-full portrait:invisible lg:py-6 text-center">
-          <div className="flex flex-wrap justify-center">
-            <div className="p-20">
-              <Image
-                src="/profile.jpg"
-                className="shadow rounded-full max-w-full h-auto align-middle border-none"
-                alt="Peter Biro"
-                width={500}
-                height={500}
-              />
-            </div>
-          </div>
+        <div className="w-2/5 portrait:hidden flex justify-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.15 }}
+            className="relative rounded-full p-[3px]"
+            style={{
+              background:
+                'linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,255,255,0.05))',
+              boxShadow: '0 30px 80px -20px rgba(0,0,0,0.6)',
+            }}
+          >
+            <Image
+              src="/profile.jpg"
+              className="rounded-full"
+              alt="Peter Biro"
+              width={380}
+              height={380}
+            />
+          </motion.div>
         </div>
       </div>
 
       <motion.div
-        className="absolute bottom-0 right-0 text-center text-gray-500 "
-        transition={bounceTransition}
-        animate={{
-          y: ['10%', '-10%'],
-        }}
+        className="absolute bottom-2 right-2 text-center text-white/50"
+        animate={{ y: ['8%', '-8%'] }}
+        transition={{ duration: 0.9, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
       >
-        Down
         <svg
-          className="w-9 m-0.5"
+          className="w-7"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -168,7 +169,7 @@ const FrontPage = () => {
           />
         </svg>
       </motion.div>
-    </>
+    </div>
   )
 }
 
