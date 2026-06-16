@@ -160,6 +160,15 @@ const Layout = ({ children, lowFrameRate }: Props) => {
         color2={color.color2}
         className="fixed h-full w-full object-cover"
       />
+      {/* Cinematic vignette: darken the edges so the glass cards float and the
+          page reads richer regardless of the random colour theme. */}
+      <div
+        className="fixed inset-0 pointer-events-none z-0"
+        style={{
+          background:
+            'radial-gradient(125% 125% at 50% 45%, transparent 48%, rgba(4,6,12,0.5) 100%)',
+        }}
+      />
       <div className="overscroll-none bg-fixed">
         <Head>
           <title>Peter Biro - Frontend / FullStack Developer</title>
