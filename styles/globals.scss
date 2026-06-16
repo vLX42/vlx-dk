@@ -6,28 +6,43 @@
 @layer base {
   .glass {
     /* Safari / fallback: frosted blur only. */
-    -webkit-backdrop-filter: blur(14px) saturate(180%);
-    /* Chromium: add the SVG displacement map for a refracting, deforming glass. */
-    backdrop-filter: blur(8px) saturate(180%) url(#glass-distortion);
+    -webkit-backdrop-filter: blur(12px) saturate(185%) brightness(1.06);
+    /* Chromium: add the SVG displacement map for a liquid, refracting glass. */
+    backdrop-filter: blur(5px) saturate(185%) brightness(1.06) url(#glass-distortion);
   }
 
   .background {
-    /* @apply backdrop-filter-blur; */
-    background: rgb(255, 255, 255,0.18);
+    /* Liquid glass: mostly clear in the centre, brighter toward the edges. */
     background: linear-gradient(
-      128deg,
-      rgba(255, 255, 255, 0.4) 0%,
-      rgba(255, 255, 255, 0.12) 45%,
-      rgba(150, 150, 150, 0.16) 78%,
-      rgba(120, 120, 120, 0.22) 89%,
-      rgba(54, 54, 54, 0.28) 100%
+      135deg,
+      rgba(255, 255, 255, 0.32) 0%,
+      rgba(255, 255, 255, 0.10) 38%,
+      rgba(255, 255, 255, 0.06) 62%,
+      rgba(255, 255, 255, 0.16) 100%
     );
     box-shadow:
-      0 8px 32px 0 rgba(31, 31, 31, 0.37),
-      inset 0 1px 1px rgba(255, 255, 255, 0.6),
-      inset 0 -1px 1px rgba(255, 255, 255, 0.12);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.35);
+      0 14px 45px 0 rgba(0, 0, 0, 0.35),
+      inset 0 1px 1px rgba(255, 255, 255, 0.8),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.22),
+      inset 0 -14px 34px rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  /* Specular top-edge sheen, the giveaway of liquid glass. */
+  .background::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0.05) 22%,
+      rgba(255, 255, 255, 0) 45%
+    );
+    pointer-events: none;
+    z-index: 1;
   }
 }
 

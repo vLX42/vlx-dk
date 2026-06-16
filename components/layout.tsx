@@ -139,16 +139,16 @@ const Layout = ({ children, lowFrameRate }: Props) => {
           >
             <feTurbulence
               type="fractalNoise"
-              baseFrequency="0.008 0.012"
+              baseFrequency="0.005 0.006"
               numOctaves="2"
               seed="17"
               result="noise"
             />
-            <feGaussianBlur in="noise" stdDeviation="3" result="softNoise" />
+            <feGaussianBlur in="noise" stdDeviation="4" result="softNoise" />
             <feDisplacementMap
               in="SourceGraphic"
               in2="softNoise"
-              scale="30"
+              scale="45"
               xChannelSelector="R"
               yChannelSelector="G"
             />

@@ -30,11 +30,11 @@ export const Card = ({
   bare?: boolean
 }) => (
   <div
-    className={`absolute inset-0 rounded-2xl text-white body-font ${
+    className={`absolute inset-0 rounded-3xl text-white body-font ${
       bare ? '' : 'background'
     } ${glassEffect && !bare ? 'glass' : ''}`}
   >
-    <div className="px-8 py-8 lg:px-12 lg:py-12 h-full flex flex-col justify-center overflow-y-auto">
+    <div className="relative z-10 px-8 py-8 lg:px-12 lg:py-12 h-full flex flex-col justify-center overflow-y-auto">
       {children}
     </div>
   </div>
@@ -100,13 +100,8 @@ const jobPostingPhases: Phase[] = [
     eyebrow: 'Phase 1 · Stills',
     heading: 'AI-generated images',
     copy: 'Job ads built from AI stills riffing on Pixar and Disney, made with whatever image model was best at the time (nano banana). A few tries, an afternoon each.',
-    grid: 'grid grid-cols-3 portrait:grid-cols-1 gap-4 items-start',
+    grid: 'grid grid-cols-2 portrait:grid-cols-1 gap-4 items-start',
     media: [
-      {
-        type: 'image',
-        src: '/job-senior-frontend-dfds.jpg',
-        alt: 'AI job poster for a Senior Frontend Developer at DFDS',
-      },
       {
         type: 'image',
         src: '/job-dfds-pixar-poster.jpg',

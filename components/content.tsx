@@ -202,21 +202,34 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
                   className="thumbnail relative"
                 >
                   {s.cards.map((card, sj) => {
-                    const isActive = sj === stopActiveSub
+                    // depth 0 = top card, >0 = stacked behind, <0 = flipped past
+                    const depth = sj - stopActiveSub
+                    const behind = Math.min(Math.max(depth, 0), 3)
+                    const anim =
+                      depth === 0
+                        ? { x: '0%', y: '0%', scale: 1, rotateZ: 0, opacity: 1 }
+                        : depth < 0
+                        ? { x: '-12%', y: '-4%', scale: 0.94, rotateZ: -4, opacity: 0 }
+                        : {
+                            x: `${behind * 2.5}%`,
+                            y: `${behind * 3}%`,
+                            scale: 1 - behind * 0.05,
+                            rotateZ: behind * 1.1,
+                            opacity: depth > 3 ? 0 : 1 - behind * 0.12,
+                          }
+                    const zIndex =
+                      depth === 0 ? 60 : depth < 0 ? 5 : 60 - behind
                     return (
                       <motion.div
                         key={sj}
                         className="absolute inset-0"
                         initial={false}
-                        animate={{
-                          opacity: isActive ? 1 : 0,
-                          y: isActive ? '0%' : sj < stopActiveSub ? '-6%' : '6%',
-                          scale: isActive ? 1 : 0.98,
-                        }}
-                        transition={{ duration: 0.45, ease: 'easeOut' }}
+                        animate={anim}
+                        transition={{ type: 'spring', stiffness: 260, damping: 30 }}
                         style={{
-                          zIndex: isActive ? 2 : 1,
-                          pointerEvents: isActive ? 'auto' : 'none',
+                          zIndex,
+                          pointerEvents: depth === 0 ? 'auto' : 'none',
+                          transformOrigin: 'center center',
                         }}
                       >
                         {card}
