@@ -29,6 +29,22 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
+  /* Opaque fallback used when the blur effect is off (low frame rate), so white
+     text stays readable over the animated background. */
+  .card-solid {
+    background: linear-gradient(
+      135deg,
+      rgba(24, 27, 38, 0.66) 0%,
+      rgba(24, 27, 38, 0.54) 100%
+    );
+    box-shadow:
+      0 14px 45px rgba(0, 0, 0, 0.4),
+      inset 0 1px 1px rgba(255, 255, 255, 0.14);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    position: relative;
+  }
+
   /* Specular top-edge sheen, the giveaway of liquid glass. */
   .background::before {
     content: '';
@@ -49,6 +65,12 @@
 html,
 body {
   overscroll-behavior: none;
+}
+
+/* Keep white card copy legible over the busy background in both glass and
+   solid (blur-off) modes. */
+.deck-text {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 $black: #141414;

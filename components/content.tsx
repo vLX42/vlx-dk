@@ -42,9 +42,10 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
   const [viewportH, setViewportH] = useState(800)
   const [stopOffsets, setStopOffsets] = useState<number[]>([])
 
-  // The top-level deck. Each stop holds one or more stacked sub-cards.
-  const stops = useMemo(
-    () => [
+  // The top-level deck. Only the AI job-posting Story is a stacked sub-deck;
+  // everything else (including each CV entry) is its own single-card stop.
+  const stops = useMemo(() => {
+    const base = [
       {
         label: 'Intro',
         cards: [
@@ -56,15 +57,13 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
       { label: 'Story', cards: getStoryCards(glassEffect) },
       { label: 'Lab', cards: [<LabCard key="lab" glassEffect={glassEffect} />] },
       { label: 'Idea', cards: [<IdeaCard key="idea" glassEffect={glassEffect} />] },
-      {
-        label: 'Experience',
-        cards: data.map((c) => (
-          <CvCard key={c.slug} cv={c} glassEffect={glassEffect} />
-        )),
-      },
-    ],
-    [data, glassEffect]
-  )
+    ]
+    const cvStops = data.map((c) => ({
+      label: c.year || 'Work',
+      cards: [<CvCard key={c.slug} cv={c} glassEffect={glassEffect} />],
+    }))
+    return [...base, ...cvStops]
+  }, [data, glassEffect])
 
   // Flatten into frames (one per sub-card) and record where each stop starts.
   const { frames, firstFrame } = useMemo(() => {
@@ -202,20 +201,30 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
                   className="thumbnail relative"
                 >
                   {s.cards.map((card, sj) => {
-                    // depth 0 = top card, >0 = stacked behind, <0 = flipped past
+                    // Like a hand of playing cards: top card face-up, the rest
+                    // fanned behind it; advancing deals the top card off with a
+                    // spin and brings the next one to the front.
                     const depth = sj - stopActiveSub
-                    const behind = Math.min(Math.max(depth, 0), 3)
+                    const behind = Math.min(Math.max(depth, 0), 4)
                     const anim =
                       depth === 0
-                        ? { x: '0%', y: '0%', scale: 1, rotateZ: 0, opacity: 1 }
+                        ? { x: '0%', y: '0%', rotate: 0, scale: 1, opacity: 1 }
                         : depth < 0
-                        ? { x: '-12%', y: '-4%', scale: 0.94, rotateZ: -4, opacity: 0 }
+                        ? {
+                            // dealt off the top, spins away to the left
+                            x: '-65%',
+                            y: '-14%',
+                            rotate: -26,
+                            scale: 0.9,
+                            opacity: 0,
+                          }
                         : {
-                            x: `${behind * 2.5}%`,
-                            y: `${behind * 3}%`,
-                            scale: 1 - behind * 0.05,
-                            rotateZ: behind * 1.1,
-                            opacity: depth > 3 ? 0 : 1 - behind * 0.12,
+                            // fanned in hand behind the top card
+                            x: `${behind * 4.5}%`,
+                            y: `${behind * 1.5}%`,
+                            rotate: behind * 3.5,
+                            scale: 1 - behind * 0.03,
+                            opacity: depth > 4 ? 0 : 1 - behind * 0.13,
                           }
                     const zIndex =
                       depth === 0 ? 60 : depth < 0 ? 5 : 60 - behind
@@ -225,11 +234,11 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
                         className="absolute inset-0"
                         initial={false}
                         animate={anim}
-                        transition={{ type: 'spring', stiffness: 260, damping: 30 }}
+                        transition={{ type: 'spring', stiffness: 240, damping: 26 }}
                         style={{
                           zIndex,
                           pointerEvents: depth === 0 ? 'auto' : 'none',
-                          transformOrigin: 'center center',
+                          transformOrigin: 'bottom center',
                         }}
                       >
                         {card}

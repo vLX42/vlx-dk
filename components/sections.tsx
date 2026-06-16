@@ -31,10 +31,10 @@ export const Card = ({
 }) => (
   <div
     className={`absolute inset-0 rounded-3xl text-white body-font ${
-      bare ? '' : 'background'
-    } ${glassEffect && !bare ? 'glass' : ''}`}
+      bare ? '' : glassEffect ? 'background glass' : 'card-solid'
+    }`}
   >
-    <div className="relative z-10 px-8 py-8 lg:px-12 lg:py-12 h-full flex flex-col justify-center overflow-y-auto">
+    <div className="deck-text relative z-10 px-8 py-8 lg:px-12 lg:py-12 h-full flex flex-col justify-center overflow-y-auto">
       {children}
     </div>
   </div>
