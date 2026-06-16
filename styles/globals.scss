@@ -73,6 +73,21 @@ body {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
+/* Performance: cards that are stacked behind the top one, or off the active
+   stop, drop the costly backdrop-filter and keep only the cheap gradient.
+   Avoids many overlapping displacement filters tanking the frame rate. */
+.no-glass-fx .glass {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+/* Neighbour cards: blur-only glass without the expensive SVG displacement, so
+   only the single active card ever pays for the refraction. */
+.glass-lite .glass {
+  -webkit-backdrop-filter: blur(10px) saturate(175%) brightness(1.05);
+  backdrop-filter: blur(10px) saturate(175%) brightness(1.05);
+}
+
 $black: #141414;
 
 .inverted {

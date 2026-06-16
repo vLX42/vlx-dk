@@ -228,10 +228,22 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
                           }
                     const zIndex =
                       depth === 0 ? 60 : depth < 0 ? 5 : 60 - behind
+                    // GPU budget: the costly displacement glass runs only on the
+                    // single active top card; immediate neighbours get cheap
+                    // blur-only glass; stacked/offscreen cards drop the filter.
+                    const dist = Math.abs(si - activeStop)
+                    const fxClass =
+                      depth !== 0
+                        ? ' no-glass-fx'
+                        : dist === 0
+                        ? ''
+                        : dist === 1
+                        ? ' glass-lite'
+                        : ' no-glass-fx'
                     return (
                       <motion.div
                         key={sj}
-                        className="absolute inset-0"
+                        className={`absolute inset-0${fxClass}`}
                         initial={false}
                         animate={anim}
                         transition={{ type: 'spring', stiffness: 240, damping: 26 }}
