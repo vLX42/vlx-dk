@@ -1,24 +1,9 @@
 // next.config.js
+/** @type {import('next').NextConfig} */
 module.exports = {
-  plugins: [
-    'tailwindcss',
-    'postcss-flexbugs-fixes',
-    [
-      'postcss-preset-env',
-      {
-        autoprefixer: {
-          flexbox: 'no-2009',
-        },
-        stage: 3,
-        features: {
-          'custom-properties': false,
-        },
-      },
-    ],
-  ],
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-
-    // Important: return the modified config
-    return config
+  // Pin the project root so the parent folder's stray lockfile isn't picked up,
+  // and provide an (empty) Turbopack config now that it's the default in Next 16.
+  turbopack: {
+    root: __dirname,
   },
 }

@@ -1,6 +1,6 @@
 module.exports = {
-  purge: ['./components/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  content: ['./components/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'media',
   theme: {
     screens: {
       sm: '480px',
@@ -36,8 +36,5 @@ module.exports = {
     },
   },
 
-  variants: {
-    extend: {},
-  },
   plugins: [],
 }

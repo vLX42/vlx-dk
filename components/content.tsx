@@ -6,17 +6,15 @@ import React, {
   useCallback,
   useMemo,
 } from 'react'
-import ResizeObserver from 'resize-observer-polyfill'
 import {
   motion,
-  useViewportScroll,
+  useScroll,
   useTransform,
   useSpring,
   useAnimation,
 } from 'framer-motion'
 import { useWheel } from '@use-gesture/react'
-import { useRouter } from 'next/router'
-import { useQueryState } from 'next-usequerystate'
+import { useQueryState } from 'nuqs'
 import FrontPage from './frontpage'
 import { getStoryCards, LabCard, IdeaCard, CvCard } from './sections'
 import PanelNav from './panelNav'
@@ -44,8 +42,10 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
   const [viewportH, setViewportH] = useState(800)
   const [stopOffsets, setStopOffsets] = useState<number[]>([])
   // Deep-linkable deck position via nuqs (?deck=story, ?deck=lab, ?deck=dfds ...)
-  const router = useRouter()
-  const [deckParam, setDeckParam] = useQueryState('deck', { history: 'replace' })
+  const [, setDeckParam] = useQueryState('deck', {
+    history: 'replace',
+    scroll: false,
+  })
   const didInitNav = useRef(false)
 
   // The top-level deck. Only the AI job-posting Story is a stacked sub-deck;
@@ -102,7 +102,7 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
   const framesRef = useRef(frames)
   framesRef.current = frames
 
-  const { scrollYProgress } = useViewportScroll()
+  const { scrollYProgress } = useScroll()
 
   // Horizontal position: a step function of the current stop. Flat (held) while
   // flipping a sub-deck, ramps between stops. The spring smooths the slide.
@@ -196,24 +196,25 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
   const subActive = activeFrame - (firstFrame[activeStop] ?? 0)
   const subCount = stops[activeStop]?.cards.length ?? 1
 
-  // On first load, jump to the deck named in ?deck=... (shareable links).
-  // Wait for the router query to hydrate so deckParam is populated.
+  // On first load, jump to the deck named in ?deck=... (shareable links). Read
+  // it straight from the URL once layout is measured, so there is no race with
+  // router/nuqs query hydration.
   useEffect(() => {
     if (didInitNav.current) return
-    if (!router.isReady) return
     if (!stopOffsets.length) return
     didInitNav.current = true
-    if (!deckParam) return
-    const idx = stops.findIndex((s) => s.slug === deckParam)
+    const initial = new URLSearchParams(window.location.search).get('deck')
+    if (!initial) return
+    const idx = stops.findIndex((s) => s.slug === initial)
     if (idx > 0) window.requestAnimationFrame(() => goToFrame(firstFrame[idx]))
-  }, [router.isReady, stopOffsets, deckParam, stops, firstFrame, goToFrame])
+  }, [stopOffsets, stops, firstFrame, goToFrame])
 
   // Reflect the current deck in the URL as you browse. scroll:false is critical:
   // without it every URL update would yank the window back to the top.
   useEffect(() => {
     if (!didInitNav.current) return
     const slug = stops[activeStop]?.slug
-    setDeckParam(slug && slug !== 'intro' ? slug : null, { scroll: false })
+    setDeckParam(slug && slug !== 'intro' ? slug : null)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeStop])
 
