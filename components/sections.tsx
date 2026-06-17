@@ -261,6 +261,121 @@ export const IdeaCard = ({ glassEffect }: { glassEffect: boolean }) => (
 )
 
 /* ------------------------------------------------------------------ */
+/* A6. Professional timeline (closing card)                            */
+/* ------------------------------------------------------------------ */
+
+type TimelineItem = {
+  year: string
+  role: string
+  desc: string
+  pivot?: boolean
+}
+
+// The full arc, condensed to one line each. Pivots (founding a company, moving
+// full-time, changing chapter) get the teal accent and a filled node.
+const timeline: TimelineItem[] = [
+  {
+    year: '1998 to 2000',
+    role: 'System Developer, Datagruppen Consult',
+    desc: 'Built Sitebuilder, a CMS, for the sister company Netmaster.',
+  },
+  {
+    year: '2000 to 2002',
+    role: 'System Developer, Telia Internet A/S',
+    desc: "Joined through Telia's buy of Netmaster. Built Siteworks, a SaaS reseller platform for registering domains and spinning up sites.",
+  },
+  {
+    year: 'Late 2002',
+    role: 'Founded Siteworks ApS',
+    desc: 'Telia closed its Danish internet projects, so my partners and I bought the product. Incorporated 4 December 2002.',
+    pivot: true,
+  },
+  {
+    year: '2003 to 2006',
+    role: 'System Developer, SHG.dk (now Proshop.dk)',
+    desc: 'E-commerce, ERP, inventory and RMA by day, with Siteworks running part-time. Also export and display work at Designvision.',
+  },
+  {
+    year: '2007 to 2019',
+    role: 'Lead Developer and Partner, Siteworks ApS',
+    desc: 'Grew it into a 15 to 18 person agency on our own in-house CMS. Clients included IBM, Deloitte, Dong Energy and Advodan.',
+    pivot: true,
+  },
+  {
+    year: '2019 to 2023',
+    role: 'Senior Full Stack Developer, DFDS',
+    desc: 'Led the MyFreight2 rewrite (React, Nest.js BFF, Redis, Kafka) and started the Frontend Community.',
+  },
+  {
+    year: '2023 to present',
+    role: 'Frontend Chapter Lead, DFDS',
+    desc: 'Own frontend standards across teams. Authored the Control Tower POC, built AI document ingestion in MyFreight, and mentor the chapter.',
+    pivot: true,
+  },
+]
+
+const TimelineEntry = ({ item }: { item: TimelineItem }) => (
+  <li className="relative pl-6 pb-4 last:pb-0">
+    <span
+      className={`absolute left-0 top-[0.35rem] -translate-x-1/2 rounded-full ${
+        item.pivot
+          ? 'h-3 w-3 portrait:h-4 portrait:w-4 bg-teal-300 ring-2 ring-teal-300/40'
+          : 'h-2.5 w-2.5 portrait:h-3.5 portrait:w-3.5 bg-[#0b0e16] border-2 border-sky-400'
+      }`}
+    />
+    <div
+      className={`text-xs portrait:text-base font-bold uppercase tracking-[0.12em] ${
+        item.pivot ? 'text-teal-300' : 'text-sky-300'
+      }`}
+    >
+      {item.year}
+    </div>
+    <div className="mt-0.5 text-tiny portrait:text-xl font-bold leading-snug text-white">
+      {item.role}
+    </div>
+    <p className="mt-1 text-xs portrait:text-base leading-snug text-white/70">
+      {item.desc}
+    </p>
+  </li>
+)
+
+export const TimelineCard = ({ glassEffect }: { glassEffect: boolean }) => {
+  const mid = Math.ceil(timeline.length / 2)
+  const columns = [timeline.slice(0, mid), timeline.slice(mid)]
+  return (
+    <Card glassEffect={glassEffect}>
+      <p className={eyebrow}>The whole arc</p>
+      <h1 className="mb-1 text-4xl portrait:text-6xl font-bold tracking-tight leading-[1.05] text-white">
+        Professional timeline
+      </h1>
+      <p className="mb-4 text-sm portrait:text-xl text-white/60">
+        1998 to present, the short version.
+      </p>
+
+      <div className="mb-5 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-xs portrait:text-base leading-relaxed text-white/65 max-w-3xl">
+        <span className="font-semibold text-white/90">Education:</span>{' '}
+        Datamatiker, Esbjerg, 1995 to 1998.{' '}
+        <span className="font-semibold text-white/90">Alongside, 1995 to 2005:</span>{' '}
+        CompuClub, a computer club running net parties and a computer news page.
+      </div>
+
+      <div className="grid grid-cols-2 portrait:grid-cols-1 gap-x-10 portrait:gap-x-0 gap-y-4">
+        {columns.map((col, ci) => (
+          <ol
+            key={ci}
+            className="relative border-l-2 border-white/15"
+          >
+            {col.map((item) => (
+              <TimelineEntry key={item.role} item={item} />
+            ))}
+          </ol>
+        ))}
+      </div>
+    </Card>
+  )
+}
+
+/* ------------------------------------------------------------------ */
 /* Experience sub-deck: one card per CV entry                          */
 /* ------------------------------------------------------------------ */
 

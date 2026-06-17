@@ -16,7 +16,7 @@ import {
 import { useWheel } from '@use-gesture/react'
 import { useQueryState } from 'nuqs'
 import FrontPage from './frontpage'
-import { getStoryCards, LabCard, IdeaCard, CvCard } from './sections'
+import { getStoryCards, LabCard, IdeaCard, CvCard, TimelineCard } from './sections'
 import PanelNav from './panelNav'
 import cv from '../types/cv'
 
@@ -78,7 +78,12 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
       slug: c.slug,
       cards: [<CvCard key={c.slug} cv={c} glassEffect={glassEffect} />],
     }))
-    return [...base, ...cvStops]
+    const timelineStop = {
+      label: 'Timeline',
+      slug: 'timeline',
+      cards: [<TimelineCard key="timeline" glassEffect={glassEffect} />],
+    }
+    return [...base, ...cvStops, timelineStop]
   }, [data, glassEffect])
 
   // Flatten into frames (one per sub-card) and record where each stop starts.
