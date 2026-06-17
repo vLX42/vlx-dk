@@ -93,6 +93,58 @@ body {
   filter: brightness(0.5) saturate(0.82) blur(1px);
 }
 
+/* Mobile portrait hint: the horizontal deck is built for landscape. Hidden by
+   default; only appears on small portrait screens and disappears once rotated. */
+.rotate-hint {
+  display: none;
+}
+
+@media (orientation: portrait) and (max-width: 900px) {
+  .rotate-hint {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1.05rem;
+    border-radius: 9999px;
+    background: rgba(17, 19, 30, 0.6);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    color: rgba(255, 255, 255, 0.92);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .rotate-hint svg {
+    width: 1.35rem;
+    height: 1.35rem;
+    flex-shrink: 0;
+    transform-origin: 50% 50%;
+    animation: rotate-hint-turn 2.4s ease-in-out infinite;
+  }
+}
+
+/* Icon nudges from portrait to landscape and back to suggest the gesture. */
+@keyframes rotate-hint-turn {
+  0%, 18% {
+    transform: rotate(0deg);
+  }
+  45%, 73% {
+    transform: rotate(-90deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 $black: #141414;
 
 .inverted {
