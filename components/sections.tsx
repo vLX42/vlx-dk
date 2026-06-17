@@ -277,7 +277,7 @@ const timeline: TimelineItem[] = [
   {
     year: '1998 to 2000',
     role: 'System Developer, Datagruppen Consult',
-    desc: 'Built Sitebuilder, a CMS, for the sister company Netmaster.',
+    desc: 'Built Sitebuilder, a CMS, for the sister company Netmaster, and a city portal system for Esbjerg and a few other cities.',
   },
   {
     year: '2000 to 2002',
