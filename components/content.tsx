@@ -61,12 +61,12 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
           </div>,
         ],
       },
-      { label: 'Story', slug: 'story', cards: getStoryCards(glassEffect) },
       {
         label: 'Lab',
         slug: 'lab',
         cards: [<LabCard key="lab" glassEffect={glassEffect} />],
       },
+      { label: 'Story', slug: 'story', cards: getStoryCards(glassEffect) },
       {
         label: 'Idea',
         slug: 'idea',
