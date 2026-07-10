@@ -1,19 +1,19 @@
 ---
-title: 'Smelt: building my own agent harness'
+title: 'Smelt: my agents, my harness, my rules'
 slug: 'smelt'
 date: '2026-07-10'
 coverImage: '/smelt.jpg'
 video: '/smelt.mp4'
 videoThumb: '/smelt.jpg'
 technology: 'GitHub Copilot CLI SDK, Tauri, Rust, React, TypeScript, Node.js, Azure DevOps'
-excerpt: 'My discovery trip into the GitHub Copilot CLI SDK: own the harness, run a fleet of agents, feed them real backlog items, and see if something meaningful comes back.'
+excerpt: 'Nobody sold the AI dev team I wanted, so I built it: my own harness on the GitHub Copilot CLI SDK, with an architect, a fleet of specialists, and my rules.'
 ---
 
-# Smelt: building my own agent harness
+# Smelt: my agents, my harness, my rules
 
-Every AI coding tool hands you the same deal: their loop, their prompts, their rules. Then GitHub shipped the Copilot CLI SDK and the curtain came off. Suddenly you could own the harness: spawn the agents, write their instructions, decide what they are allowed to touch. I had to know how far that goes. Smelt is the itch, scratched on evenings.
+Most AI tools want to be your assistant. I wanted a team: an architect that plans, specialist devs that write the code, reviewers that nag, a test writer that keeps everyone honest. Running on my rules, my prompts, my guardrails. Nobody sold that, so I built it.
 
-The experiment was simple. Set up a fleet of agents with a real division of labour, make it dead easy to feed them work, and see if something meaningful comes back. So the interface stays honest: browse your Azure DevOps backlog, pick a PBI, pick your crew, hit Start. The video is a real run at 15x.
+Smelt is that team in an app, built on evenings on top of the GitHub Copilot CLI SDK. Feed it a backlog item, pick your crew, hit Start, and watch it grind its way to a draft PR. The video is a real run at 15x.
 
 ## One architect, a fleet of specialists
 
