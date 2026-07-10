@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import StyledMarkdown from './cv.styled'
@@ -73,6 +74,78 @@ const LabVideo = ({
   </div>
 )
 
+// Click-to-enlarge image with a magnifier badge. The lightbox portals to
+// document.body: the deck's framer-motion transforms would otherwise turn
+// position:fixed into a card-local overlay.
+const ZoomableImage = ({
+  src,
+  alt,
+  imgClassName,
+}: {
+  src: string
+  alt: string
+  imgClassName: string
+}) => {
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open])
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        aria-label={`View larger: ${alt}`}
+        className="group relative block mx-auto cursor-zoom-in"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={src} alt={alt} loading="lazy" className={imgClassName} />
+        <span className="absolute bottom-2 right-2 grid h-8 w-8 portrait:h-10 portrait:w-10 place-items-center rounded-full bg-black/60 text-white/90 ring-1 ring-white/25 opacity-80 transition-opacity group-hover:opacity-100">
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+          >
+            <circle cx="10.5" cy="10.5" r="6.5" />
+            <path d="M20 20l-4.9-4.9M10.5 7.8v5.4M7.8 10.5h5.4" />
+          </svg>
+        </span>
+      </button>
+      {open &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[300] flex items-center justify-center bg-black/85 p-6 cursor-zoom-out"
+            onClick={() => setOpen(false)}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={src}
+              alt={alt}
+              className="max-h-[92vh] max-w-[94vw] rounded-lg shadow-2xl ring-1 ring-white/15"
+            />
+            <button
+              type="button"
+              aria-label="Close"
+              className="absolute top-4 right-6 text-4xl leading-none text-white/80 hover:text-white"
+            >
+              ×
+            </button>
+          </div>,
+          document.body
+        )}
+    </>
+  )
+}
+
 /* ------------------------------------------------------------------ */
 /* A0. Newest article (sub-deck, one card per markdown section)        */
 /* ------------------------------------------------------------------ */
@@ -124,13 +197,11 @@ export const getArticleCards = (
               </div>
               <div className="w-1/3 portrait:w-full grid gap-4">
                 {images.map((img) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                  <ZoomableImage
                     key={img.src}
                     src={img.src}
                     alt={img.alt}
-                    loading="lazy"
-                    className={`${
+                    imgClassName={`${
                       images.length > 1 ? 'max-h-[24vh]' : 'max-h-[42vh]'
                     } max-w-full w-auto mx-auto rounded-lg shadow-lg ring-1 ring-white/10`}
                   />
