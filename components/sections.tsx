@@ -119,10 +119,10 @@ export const getArticleCards = (
           <h1 className={title}>{heading}</h1>
           {images.length > 0 ? (
             <div className="flex portrait:flex-col items-center gap-8 lg:gap-10">
-              <div className="w-7/12 portrait:w-full">
+              <div className="w-2/3 portrait:w-full [&_p]:leading-normal [&_p]:mb-3">
                 <StyledMarkdown>{text}</StyledMarkdown>
               </div>
-              <div className="w-5/12 portrait:w-full grid gap-4">
+              <div className="w-1/3 portrait:w-full grid gap-4">
                 {images.map((img) => (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -130,7 +130,9 @@ export const getArticleCards = (
                     src={img.src}
                     alt={img.alt}
                     loading="lazy"
-                    className="max-h-[24vh] max-w-full w-auto mx-auto rounded-lg shadow-lg ring-1 ring-white/10"
+                    className={`${
+                      images.length > 1 ? 'max-h-[24vh]' : 'max-h-[42vh]'
+                    } max-w-full w-auto mx-auto rounded-lg shadow-lg ring-1 ring-white/10`}
                   />
                 ))}
               </div>

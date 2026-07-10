@@ -22,7 +22,6 @@ An **architect** reads the PBI, snoops around the codebase, and writes the plan.
 Every prompt lives in the UI: rewrite a persona, swap its model, tune its reviewers. That is the whole point of owning the harness. And the agents never touch git. They get safe replacement tools and a Rust layer that physically cannot commit to main.
 
 ![The run dashboard: the architect's plan waiting for operator review](/smelt-run.jpg)
-![Smelt's main window](/smelt-app.jpg)
 
 ## What I actually learned
 
@@ -31,3 +30,5 @@ Every prompt lives in the UI: rewrite a persona, swap its model, tune its review
 **AI is an amplifier.** It amplifies your codebase, your tickets, and your judgement, good or bad. And the jury is still out on the real impact: is the extra token cost of a full fleet worth it, or does a commercial harness like Claude Code or opencode in plan mode get you just as far? Honest answer: I do not know yet.
 
 **But what a ride.** Agents built most of Smelt itself: 23,000 lines of TypeScript, 3,300 of Rust, 100 releases in three months, desktop app and VS Code extension from one codebase. Zero SLA, sharp edges included, and worth every evening. Once you have run your own fleet, autocomplete feels very quiet.
+
+![Smelt poster](/smelt-app.jpg)
