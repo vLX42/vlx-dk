@@ -4,6 +4,7 @@ import matter from 'gray-matter'
 import { load as yamlLoad } from 'js-yaml'
 
 const cvsDirectory = join(process.cwd(), '_cv')
+const articlesDirectory = join(process.cwd(), '_articles')
 
 // gray-matter ships an old js-yaml that calls the removed safeLoad. Use js-yaml 4's
 // load (safe by default) via a custom engine so we can stay on the patched version.
@@ -42,6 +43,27 @@ export function getCVBySlug(slug: string, fields: string[] = []) {
   })
 
   return items
+}
+
+// _articles/ holds long-form posts. Same frontmatter+markdown format as _cv,
+// sorted newest first by the `date` field.
+export function getAllArticles(fields: string[] = []) {
+  if (!fs.existsSync(articlesDirectory)) return []
+  return fs
+    .readdirSync(articlesDirectory)
+    .filter((f) => f.endsWith('.md'))
+    .map((file) => {
+      const fileContents = fs.readFileSync(join(articlesDirectory, file), 'utf8')
+      const { data, content } = matter(fileContents, matterOptions)
+      const items: { [key: string]: string } = {}
+      fields.forEach((field) => {
+        if (field === 'slug') items[field] = file.replace(/\.md$/, '')
+        if (field === 'content') items[field] = content
+        if (data[field]) items[field] = data[field]
+      })
+      return items
+    })
+    .sort((a, b) => (a.date > b.date ? -1 : 1))
 }
 
 export function getAllCvs(fields: string[] = []) {

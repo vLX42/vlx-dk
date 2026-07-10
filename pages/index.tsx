@@ -3,14 +3,16 @@ import { useEffect, useState } from 'react'
 import { useFPSDetect } from 'fps-react'
 import Layout from "../components/layout";
 import Content from "../components/content";
-import { getAllCvs } from '../lib/api'
+import { getAllCvs, getAllArticles } from '../lib/api'
 import cv from '../types/cv'
+import article from '../types/article'
 
 type Props = {
   allCvs: cv[]
+  newestArticle: article | null
 }
 
-const Index = ({ allCvs }: Props)  => {
+const Index = ({ allCvs, newestArticle }: Props)  => {
   const detected = useFPSDetect({ minimumFps: 20 })
   // Dev/debug override: ?glass=on forces the glass effect on, ?glass=off forces
   // the blur-off fallback. Lets us screenshot both modes regardless of FPS.
@@ -23,7 +25,7 @@ const Index = ({ allCvs }: Props)  => {
   const lowFrameRate = override ?? detected
   return (
     <Layout lowFrameRate={lowFrameRate}>
-      <Content data={allCvs} lowFrameRate={lowFrameRate} />
+      <Content data={allCvs} article={newestArticle} lowFrameRate={lowFrameRate} />
     </Layout>
   );
 }
@@ -43,7 +45,18 @@ export const getStaticProps = async () => {
     'technology',
   ])
 
+  const articles = getAllArticles([
+    'title',
+    'date',
+    'slug',
+    'coverImage',
+    'video',
+    'videoThumb',
+    'content',
+    'technology',
+  ])
+
   return {
-    props: { allCvs },
+    props: { allCvs, newestArticle: articles[0] ?? null },
   }
 }

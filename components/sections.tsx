@@ -3,6 +3,7 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import StyledMarkdown from './cv.styled'
 import cv from '../types/cv'
+import article from '../types/article'
 
 // Lazy-load the player: react-player/lazy only pulls the player it needs, and
 // next/dynamic keeps it out of the initial bundle (loads when a video mounts).
@@ -71,6 +72,50 @@ const LabVideo = ({
     </div>
   </div>
 )
+
+/* ------------------------------------------------------------------ */
+/* A0. Newest article (sub-deck, one card per markdown section)        */
+/* ------------------------------------------------------------------ */
+
+// Split an article's markdown into deck-sized chunks: the intro (everything
+// before the first ##) opens next to the video, then one card per ## section.
+// Cards can't scroll, so _articles posts must keep sections card-sized.
+export const getArticleCards = (
+  post: article,
+  glassEffect: boolean
+): React.ReactNode[] => {
+  const body = post.content.replace(/^\s*# .*\n/, '') // title comes from frontmatter
+  const sections = body.split(/\n(?=## )/)
+  const intro = (sections.shift() || '').trim()
+
+  return [
+    <Card glassEffect={glassEffect} key={`${post.slug}-intro`}>
+      <p className={eyebrow}>Newest article</p>
+      <h1 className={title}>{post.title}</h1>
+      <div className="flex portrait:flex-col items-center gap-8 lg:gap-12">
+        <div className="w-1/2 portrait:w-full">
+          <StyledMarkdown>{intro}</StyledMarkdown>
+        </div>
+        <div className="w-1/2 portrait:w-full">
+          {post.video && <LabVideo url={post.video} thumb={post.videoThumb} />}
+        </div>
+      </div>
+    </Card>,
+    ...sections.map((section) => {
+      const [headingLine, ...rest] = section.trim().split('\n')
+      const heading = headingLine.replace(/^##\s*/, '')
+      return (
+        <Card glassEffect={glassEffect} key={`${post.slug}-${heading}`}>
+          <p className={eyebrow}>{post.title}</p>
+          <h1 className={title}>{heading}</h1>
+          <div className="max-w-3xl">
+            <StyledMarkdown>{rest.join('\n').trim()}</StyledMarkdown>
+          </div>
+        </Card>
+      )
+    }),
+  ]
+}
 
 /* ------------------------------------------------------------------ */
 /* A1. Evolution of my job postings (Story sub-deck)                   */

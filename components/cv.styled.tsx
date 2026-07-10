@@ -26,6 +26,11 @@ const StyledMarkdown = ({ children }: StyledMarkdownProps) => (
               'mb-4 portrait:mb-4 text-base portrait:text-3xl leading-relaxed text-white/85 lg:text-left',
           },
         },
+        strong: {
+          props: {
+            className: 'font-semibold text-white',
+          },
+        },
         a: {
           props: {
             className: 'text-white hover:text-gray-200 hover:underline',

@@ -16,15 +16,24 @@ import {
 import { useWheel } from '@use-gesture/react'
 import { useQueryState } from 'nuqs'
 import FrontPage from './frontpage'
-import { getStoryCards, LabCard, IdeaCard, CvCard, TimelineCard } from './sections'
+import {
+  getArticleCards,
+  getStoryCards,
+  LabCard,
+  IdeaCard,
+  CvCard,
+  TimelineCard,
+} from './sections'
 import PanelNav from './panelNav'
 import cv from '../types/cv'
+import article from '../types/article'
 
 const useIsomorphicLayoutEffect =
   typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
 type contentProps = {
   data: cv[]
+  article: article | null
   lowFrameRate: boolean
 }
 
@@ -34,7 +43,7 @@ const physics = { damping: 15, mass: 0.27, stiffness: 55 }
 // viewport height. Higher = slower, more deliberate flipping.
 const SCROLL_PER_FRAME = 0.85
 
-const Content = ({ data, lowFrameRate }: contentProps) => {
+const Content = ({ data, article, lowFrameRate }: contentProps) => {
   const glassEffect = !lowFrameRate
   const scrollRef = useRef<HTMLElement>(null)
   const ghostRef = useRef<HTMLDivElement>(null)
@@ -61,6 +70,16 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
           </div>,
         ],
       },
+      // The newest article sits right after the intro, as its own sub-deck.
+      ...(article
+        ? [
+            {
+              label: 'Article',
+              slug: article.slug,
+              cards: getArticleCards(article, glassEffect),
+            },
+          ]
+        : []),
       {
         label: 'Lab',
         slug: 'lab',
@@ -84,7 +103,7 @@ const Content = ({ data, lowFrameRate }: contentProps) => {
       cards: [<TimelineCard key="timeline" glassEffect={glassEffect} />],
     }
     return [...base, ...cvStops, timelineStop]
-  }, [data, glassEffect])
+  }, [data, article, glassEffect])
 
   // Flatten into frames (one per sub-card) and record where each stop starts.
   const { frames, firstFrame } = useMemo(() => {

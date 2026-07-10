@@ -13,7 +13,7 @@ excerpt: 'My discovery trip into the GitHub Copilot CLI SDK: own the harness, ru
 
 Every AI coding tool hands you the same deal: their loop, their prompts, their rules. Then GitHub shipped the Copilot CLI SDK and the curtain came off. Suddenly you could own the harness: spawn the agents, write their instructions, decide what they are allowed to touch. I had to know how far that goes. Smelt is the itch, scratched on evenings.
 
-The experiment was simple. Set up a fleet of agents with a real division of labour, make it dead easy to feed them work, and see if something meaningful comes back. So the interface stays honest: browse your Azure DevOps backlog, pick a PBI, pick your crew, hit Start. The video above is a real run at 15x.
+The experiment was simple. Set up a fleet of agents with a real division of labour, make it dead easy to feed them work, and see if something meaningful comes back. So the interface stays honest: browse your Azure DevOps backlog, pick a PBI, pick your crew, hit Start. The video is a real run at 15x.
 
 ## One architect, a fleet of specialists
 
