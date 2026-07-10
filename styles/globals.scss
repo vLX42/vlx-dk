@@ -192,8 +192,14 @@ $black: #141414;
       height: 85vh;
       width: 86vw;
       z-index: 3;
-      /* Skip layout+paint for stops far offscreen; the explicit width/height
-         above keeps the strip's geometry (and offsetLeft measuring) stable. */
+    }
+
+    /* Skip layout+paint for stops far from the active one (set per-stop in
+       content.tsx). Never on the active stop or its neighbours: the containment
+       this implies creates a backdrop root that squares off the rounded corners
+       of their backdrop-filter glass. Far stops run no backdrop-filter, so
+       they're safe to contain; explicit width/height keeps geometry stable. */
+    .thumbnail-skip {
       content-visibility: auto;
     }
   }

@@ -256,11 +256,14 @@ const Content = ({ data, article, lowFrameRate }: contentProps) => {
                 Math.max(activeFrame - firstFrame[si], 0),
                 s.cards.length - 1
               )
+              const stopDist = Math.abs(si - activeStop)
               return (
                 <motion.div
                   key={si}
                   animate={controls}
-                  className="thumbnail relative"
+                  className={`thumbnail relative${
+                    stopDist > 1 ? ' thumbnail-skip' : ''
+                  }`}
                 >
                   {s.cards.map((card, sj) => {
                     // Like a hand of playing cards: top card face-up, the rest
