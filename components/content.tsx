@@ -303,7 +303,13 @@ const Content = ({ data, article, lowFrameRate }: contentProps) => {
                         ? ' glass-lite'
                         : ' no-glass-fx'
                     // Push stacked cards back: dim + soften so the top card leads.
-                    const behindClass = depth > 0 ? ' deck-behind' : ''
+                    // The blur variant only where it's actually seen (active stop).
+                    const behindClass =
+                      depth > 0
+                        ? dist === 0
+                          ? ' deck-behind'
+                          : ' deck-behind-cheap'
+                        : ''
                     return (
                       <motion.div
                         key={sj}

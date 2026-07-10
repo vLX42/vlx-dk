@@ -93,6 +93,12 @@ body {
   filter: brightness(0.5) saturate(0.82) blur(1px);
 }
 
+/* Fanned cards on non-active stops: same dimming but no blur — a 1px blur on
+   an 86vw layer is costly and invisible when the stop itself isn't in focus. */
+.deck-behind-cheap {
+  filter: brightness(0.5) saturate(0.82);
+}
+
 /* Mobile portrait hint: the horizontal deck is built for landscape. Hidden by
    default; only appears on small portrait screens and disappears once rotated. */
 .rotate-hint {
@@ -186,6 +192,9 @@ $black: #141414;
       height: 85vh;
       width: 86vw;
       z-index: 3;
+      /* Skip layout+paint for stops far offscreen; the explicit width/height
+         above keeps the strip's geometry (and offsetLeft measuring) stable. */
+      content-visibility: auto;
     }
   }
 }
