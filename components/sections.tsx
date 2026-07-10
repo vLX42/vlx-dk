@@ -104,13 +104,42 @@ export const getArticleCards = (
     ...sections.map((section) => {
       const [headingLine, ...rest] = section.trim().split('\n')
       const heading = headingLine.replace(/^##\s*/, '')
+      // Images in a section move to a side column (cards can't scroll, so
+      // in-flow markdown images would overflow).
+      const imgRe = /!\[([^\]]*)\]\(([^)\s]+)\)/g
+      const bodyRaw = rest.join('\n')
+      const images = Array.from(bodyRaw.matchAll(imgRe)).map((m) => ({
+        alt: m[1],
+        src: m[2],
+      }))
+      const text = bodyRaw.replace(imgRe, '').replace(/\n{3,}/g, '\n\n').trim()
       return (
         <Card glassEffect={glassEffect} key={`${post.slug}-${heading}`}>
           <p className={eyebrow}>{post.title}</p>
           <h1 className={title}>{heading}</h1>
-          <div className="max-w-3xl">
-            <StyledMarkdown>{rest.join('\n').trim()}</StyledMarkdown>
-          </div>
+          {images.length > 0 ? (
+            <div className="flex portrait:flex-col items-center gap-8 lg:gap-10">
+              <div className="w-7/12 portrait:w-full">
+                <StyledMarkdown>{text}</StyledMarkdown>
+              </div>
+              <div className="w-5/12 portrait:w-full grid gap-4">
+                {images.map((img) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    key={img.src}
+                    src={img.src}
+                    alt={img.alt}
+                    loading="lazy"
+                    className="max-h-[24vh] max-w-full w-auto mx-auto rounded-lg shadow-lg ring-1 ring-white/10"
+                  />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="max-w-3xl">
+              <StyledMarkdown>{text}</StyledMarkdown>
+            </div>
+          )}
         </Card>
       )
     }),

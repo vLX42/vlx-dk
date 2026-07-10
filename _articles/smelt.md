@@ -21,6 +21,9 @@ An **architect** reads the PBI, snoops around the codebase, and writes the plan.
 
 Every prompt lives in the UI: rewrite a persona, swap its model, tune its reviewers. That is the whole point of owning the harness. And the agents never touch git. They get safe replacement tools and a Rust layer that physically cannot commit to main.
 
+![The run dashboard: the architect's plan waiting for operator review](/smelt-run.jpg)
+![Smelt's main window](/smelt-app.jpg)
+
 ## What I actually learned
 
 **The bottleneck moves.** A pipeline like this is only as good as the ticket you feed it. A sharp PBI gets a plan like a senior wrote it. A vague one-liner gets a confident plan for the wrong thing. In an organisation the size of DFDS, automating the coding just moves the queue to whoever writes the work items. The sharpest engineering skill in the room becomes writing a good ticket.
